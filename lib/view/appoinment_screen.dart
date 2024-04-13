@@ -10,17 +10,18 @@ class AppoinmentScreen extends StatefulWidget {
 
 class _AppoinmentScreenState extends State<AppoinmentScreen> {
    
-   int selectedindex = -1; // Initialize selectedindex to -1
+   int selectedindex = -1; 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Chats",
+          "My Appoinments",
           style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        actions: [IconButton(onPressed: (){}, icon: Icon(Icons.add_circle_outline))],
       ),
       body: Column(
         children: [
@@ -34,7 +35,7 @@ class _AppoinmentScreenState extends State<AppoinmentScreen> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        selectedindex = index; // Assign index to selectedindex
+                        selectedindex = index;
                       });
                     },
                     child: Container(
@@ -50,26 +51,30 @@ class _AppoinmentScreenState extends State<AppoinmentScreen> {
                               offset: Offset(0, 3),
                             ),
                           ],
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Center(
-                        child: ListTile(
-                          leading: Container(
-                            height: 100,
-                            width: 70,
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 152, 228, 154),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Center(child: Text("19 march",style: GoogleFonts.montserrat(
+                          borderRadius: BorderRadius.circular(20)),
+                      child: ListTile(
+                        leading: Container(
+                          height: 100,
+                          width: 70,
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 197, 241, 197),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Center(child: Text("19 march",style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.bold,
+                            color:selectedindex==index?Colors.white:Colors.black),)),
+                        ),
+                        
+                        title: Text(
+                          "Dr. Ward Warren",
+                          style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.bold,
-                              color:selectedindex==index?Colors.white:Colors.black),)),
-                          ),
-                          title: Text(
-                            "Dr. Ward Warren",
-                            style: GoogleFonts.montserrat(
-                                fontWeight: FontWeight.bold,
-                                color: selectedindex == index ? Colors.white : Colors.black), // Change text color based on selectedindex
-                          ),
-                          subtitle: Text("Neuro Medicine",style: GoogleFonts.montserrat(color:selectedindex==index?Colors.white:Colors.black),),
+                              color: selectedindex == index ? Colors.white : Colors.black), 
+                        ),
+                        subtitle: Column(
+                          children: [
+                            Text("Neuro Medicine",style: GoogleFonts.montserrat(color:selectedindex==index?Colors.white:Colors.black),),
+                            Text("10.00 TO 10.30",style: GoogleFonts.montserrat(color:selectedindex==index?Colors.white:Colors.black),)
+                          ],
                         ),
                       ),
                     ),

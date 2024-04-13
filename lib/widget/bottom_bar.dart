@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 
 class BottomNavigation extends StatelessWidget {
   final List<Widget> _pages = [
-    HomeScreen(),
+    // HomeScreen(),
     AppoinmentScreen(),
     ChatScreen(),
     ProfileScreen(),
