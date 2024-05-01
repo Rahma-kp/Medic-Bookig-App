@@ -10,7 +10,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      // backgroundColor: Color.fromARGB(159, 223, 223, 223),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -30,7 +29,7 @@ class LoginScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
               TextFormField(
-                decoration: InputDecoration(
+                decoration: InputDecoration(fillColor: Colors.white,
                     prefixIcon: Icon(Icons.mail_outlined),
                     hintText: "Enter your email",
                     border: OutlineInputBorder(
@@ -112,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                         mainAxisAlignment:  MainAxisAlignment.center,
                         children: [Icon(Icons.phone_android),
                           SizedBox(width: 10,),
-                          Text("Login with Google",style: GoogleFonts.montserrat(
+                          Text("Login with phone",style: GoogleFonts.montserrat(
                                     fontSize:15,
                                   ),),
                         ],

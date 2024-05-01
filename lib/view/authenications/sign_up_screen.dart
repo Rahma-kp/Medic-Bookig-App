@@ -138,7 +138,7 @@ class SignUpScreen extends StatelessWidget {
                   children: [
                     Text("Already have an account?"),
                     InkWell(onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen(),));
+                      Navigator.of(context).pop();
                     },
                       child: Text("Login",style: TextStyle(color:Color.fromARGB(255, 30, 138, 97),),))
                   ],

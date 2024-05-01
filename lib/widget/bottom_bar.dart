@@ -6,13 +6,13 @@ import 'package:medic/controller/bottom_bar-provider.dart';
 import 'package:medic/view/appoinment_screen.dart';
 import 'package:medic/view/home_screen.dart';
 import 'package:medic/view/profile_screen.dart';
-import 'package:medic/view/Chat_screen.dart';
+import 'package:medic/view/chat_screen.dart';
 
 import 'package:provider/provider.dart';
 
 class BottomNavigation extends StatelessWidget {
   final List<Widget> _pages = [
-    // HomeScreen(),
+    HomeScreen(),
     AppoinmentScreen(),
     ChatScreen(),
     ProfileScreen(),

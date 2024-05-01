@@ -6,8 +6,8 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return Scaffold(backgroundColor: Color.fromARGB(255, 229, 224, 224),
+      appBar: AppBar(backgroundColor:  Color.fromARGB(255, 228, 226, 226),
         title: Text(
           "Chats",
           style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
@@ -20,7 +20,7 @@ class ChatScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: TextFormField(
               decoration: InputDecoration(
-                fillColor: const Color.fromARGB(255, 158, 158, 158),
+                fillColor: Colors.white,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -38,11 +38,11 @@ class ChatScreen extends StatelessWidget {
                   child: Container(
                     height: 70,
                     decoration: BoxDecoration(
-                        color: const Color.fromARGB(255, 216, 215, 215),
-                        border: Border.all(color: Colors.grey, width: 0.2),
+                        color:Colors.white,
+                        border: Border.all(color: Colors.white, width: 0.2),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
+                            color: const Color.fromARGB(255, 39, 39, 39).withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 5,
                             offset: Offset(0, 3),
