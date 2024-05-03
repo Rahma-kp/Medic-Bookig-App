@@ -1,7 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:medic/controller/carousel_controller.dart';
 import 'package:medic/view/catogory_screen.dart';
+import 'package:medic/view/doctor_listing_screen.dart';
 import 'package:medic/view/notification_screen.dart';
 import 'package:medic/widget/home_widget.dart';
 import 'package:medic/widget/imgae.dart';
@@ -95,8 +98,26 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: size.height * 0.02),
-              homeCategory(context, size, circleAvatarRadius: circleAvatarRadius),
+              SizedBox(height: size.height*0.01,),
+              Container(margin: const EdgeInsets.only(bottom: 5,top: 5),
+              height: size.height*0.15,
+                child: Expanded(
+                  child: ListView.builder(scrollDirection: Axis.horizontal,
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                    return  Padding(
+                      padding: EdgeInsets.all(5),
+                      child: GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => DoctorListScreen(),));},
+                        child: Column(
+                          children: [
+                            CircleAvatar(radius:40,backgroundImage: AssetImage("assets/carogry.jpeg"),),
+                            Text("ALL")
+                          ],
+                        )),
+                    );
+                  },),
+                ),
+              )
             
             ],
           ),

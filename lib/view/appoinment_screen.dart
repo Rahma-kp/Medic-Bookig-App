@@ -13,7 +13,7 @@ class _AppoinmentScreenState extends State<AppoinmentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: Color.fromARGB(255, 238, 235, 235),
       appBar: AppBar(
         title: Text(
           "My Appoinments",
@@ -60,7 +60,7 @@ class _AppoinmentScreenState extends State<AppoinmentScreen> {
                           height: 100,
                           width: 70,
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 197, 241, 197),
+                              color: Color.fromARGB(255, 81, 157, 81),
                               borderRadius: BorderRadius.circular(20)),
                           child: Center(
                               child: Text(
@@ -72,16 +72,16 @@ class _AppoinmentScreenState extends State<AppoinmentScreen> {
                                     : Colors.black),
                           )),
                         ),
-                        title: Text(
+                        title: Column(
+                          children: [
+                            Text(
                           "Dr. Ward Warren",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.montserrat(fontSize:20,
                               fontWeight: FontWeight.bold,
                               color: selectedindex == index
                                   ? Colors.white
                                   : Colors.black),
                         ),
-                        subtitle: Column(
-                          children: [
                             Text(
                               "Neuro Medicine",
                               style: GoogleFonts.montserrat(

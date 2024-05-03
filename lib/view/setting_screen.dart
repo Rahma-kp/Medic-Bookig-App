@@ -19,7 +19,7 @@ class SettingScreen extends StatelessWidget {
                     fontSize: size.width * 0.06,
                     fontWeight: FontWeight.w600)),
           ),
-          Stack(children: [Container(height: 400,width: 300,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.black),)],)
+          Stack(children: [Container(height: 400,width: 400,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: Colors.black),)],)
         ],
       ),
     );
