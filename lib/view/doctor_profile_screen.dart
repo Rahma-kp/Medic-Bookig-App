@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medic/view/appoinment_screen.dart';
 
 class DoctorProfile extends StatefulWidget {
   const DoctorProfile({Key? key}) : super(key: key);
@@ -23,6 +25,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
           style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
         ),
       ),
+      backgroundColor: const Color.fromARGB(255, 231, 230, 227),
       body: Column(
         children: [
           Stack(
@@ -143,17 +146,19 @@ class _DoctorProfileState extends State<DoctorProfile> {
               ],
             ),
           ),
-          Container(child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(child: Text("Book Your Appoinment",style: GoogleFonts.montserrat(
-                    color: Colors.white,
-                    fontSize: size.width * 0.04,
-                    fontWeight: FontWeight.w600,
-                  ),)),
-          ),
-            height: 55,width: 250,
-            decoration:BoxDecoration(color: Color.fromARGB(255, 29, 141, 102),
-              borderRadius: BorderRadius.circular(10)),)
+          GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) =>AppoinmentScreen() ,));},
+            child: Container(child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(child: Text("Book Your Appoinment",style: GoogleFonts.montserrat(
+                      color: Colors.white,
+                      fontSize: size.width * 0.04,
+                      fontWeight: FontWeight.w600,
+                    ),)),
+            ),
+              height: 55,width: 250,
+              decoration:BoxDecoration(color: Color.fromARGB(255, 29, 141, 102),
+                borderRadius: BorderRadius.circular(10)),),
+          )
         ],
       ),
     );

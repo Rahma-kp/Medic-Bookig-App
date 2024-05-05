@@ -78,6 +78,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   selectedItem = value;
                   if(value=="Settings"){
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingScreen(),));
+                  }if(value=="Locaion"){
+              // location sett
                   }
                 });
               },
@@ -85,6 +87,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 PopupMenuItem<String>(
                   value: 'Settings',
                   child: Text('Settings',style: GoogleFonts.montserrat(color:Colors.white,
+                        fontSize: size.width * 0.04, fontWeight: FontWeight.w600)),
+                ),
+                  PopupMenuItem<String>(
+                  value: 'Location',
+                  child: Text('Location',style: GoogleFonts.montserrat(color:Colors.white,
                         fontSize: size.width * 0.04, fontWeight: FontWeight.w600)),
                 ),
               ],

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -9,100 +10,115 @@ class AppoinmentScreen extends StatefulWidget {
 }
 
 class _AppoinmentScreenState extends State<AppoinmentScreen> {
-  int selectedindex = -1;
+  late DateTime _selectedDate;
+  late List<String> _availableTimeSlots;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDate = DateTime.now();
+    _updateAvailableTimeSlots(_selectedDate);
+  }
+
+  void _updateAvailableTimeSlots(DateTime selectedDate) {
+    _availableTimeSlots = [
+      '10:00 AM',
+      '11:00 AM',
+      '2:00 PM',
+      '3:00 PM',
+      '4:00 PM',
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Color.fromARGB(255, 238, 235, 235),
+    return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "My Appoinments",
-          style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
-        ),
         centerTitle: true,
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.add_circle_outline))
-        ],
+        title: Text("Appointment Booking"),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          CalendarDatePicker(
+            initialDate: DateTime.now(),
+            firstDate: DateTime.now().subtract(Duration(days: 140)),
+            lastDate: DateTime.now().add(Duration(days: 30)),
+            onDateChanged: (DateTime newDate) {
+              setState(() {
+                _selectedDate = newDate;
+                _updateAvailableTimeSlots(_selectedDate); 
+              });
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 30),
+            child: Text(
+              "Available Time",
+              style: GoogleFonts.montserrat(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
           Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20, right: 20, bottom: 10, top: 20),
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedindex = index;
-                      });
-                    },
-                    child: Container(
-                      height: 100,
-                      decoration: BoxDecoration(
-                          color: selectedindex == index
-                              ? Color.fromARGB(255, 33, 186, 127)
-                              : Colors.white,
-                          border: Border.all(color: Colors.grey, width: 0.2),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(20)),
-                      child: ListTile(
-                        leading: Container(
-                          height: 100,
-                          width: 70,
-                          decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 81, 157, 81),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Center(
-                              child: Text(
-                            "19 march",
+            child: Column(
+              children: [
+                Expanded(
+                  child: GridView.builder(
+                    padding: EdgeInsets.all(10),
+                    itemCount: _availableTimeSlots.length,
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 100,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                    ),
+                    itemBuilder: (context, index) {
+                      return Container(
+                        height: 50,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 186, 184, 184),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            _availableTimeSlots[index],
                             style: GoogleFonts.montserrat(
-                                fontWeight: FontWeight.bold,
-                                color: selectedindex == index
-                                    ? Colors.white
-                                    : Colors.black),
-                          )),
-                        ),
-                        title: Column(
-                          children: [
-                            Text(
-                          "Dr. Ward Warren",
-                          style: GoogleFonts.montserrat(fontSize:20,
-                              fontWeight: FontWeight.bold,
-                              color: selectedindex == index
-                                  ? Colors.white
-                                  : Colors.black),
-                        ),
-                            Text(
-                              "Neuro Medicine",
-                              style: GoogleFonts.montserrat(
-                                  color: selectedindex == index
-                                      ? Colors.white
-                                      : Colors.black),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
                             ),
-                            Text(
-                              "10.00 TO 10.30",
-                              style: GoogleFonts.montserrat(
-                                  color: selectedindex == index
-                                      ? Colors.white
-                                      : Colors.black),
-                            )
-                          ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              
+                Center(
+                  child: GestureDetector(onTap: (){},
+                    child: Container(
+                      height: 50,
+                      width: 200,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 29, 141, 102),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Confirm Schedule",
+                          style: GoogleFonts.montserrat(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                );
-              },
+                ),
+              ],
             ),
           ),
         ],
