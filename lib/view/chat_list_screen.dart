@@ -40,7 +40,7 @@ class ChatListingScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Center(
                   child: GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatScreen(),));},
-                    child: Card(color:const Color.fromARGB(255, 179, 176, 176),
+                    child: Card(color:Colors.white,
                       elevation:6,
                       child: Row(
                         children: [

@@ -8,6 +8,7 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor:Color.fromARGB(255, 229, 224, 224),
       appBar: AppBar(iconTheme: IconThemeData(color: Colors.white),
       actions: [IconButton(onPressed: (){}, icon: Icon(Icons.call))],
         backgroundColor:Color.fromARGB(255, 38, 140, 101) ,

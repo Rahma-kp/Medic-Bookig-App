@@ -18,7 +18,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar( backgroundColor:const Color.fromARGB(255, 231, 230, 227),
         centerTitle: true,
         title: Text(
           'Doctor profile',
@@ -120,7 +120,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
-                    "sdfghjkljnkjn huihuiguiguig uihihio huihrihoi jriojpjgio jnhgoiio jnjrnijio kjnfjaioff kjnfkjiof enrkjrioj knafiooa afknaiodgioag dsffdfdsd afdfad dffadf adaf d  aeaf aadfniaogjioa",
+                    "Dr. Courtney Herry’s expertise includes comprehensive care for epilepsy, epilepsy surgery and electroencephalography advance reporting system. He is also a significant member of Indian Academy of Neurology.",
                     textAlign: TextAlign.justify,
                     overflow: TextOverflow.ellipsis,
                     maxLines: isSummaryExpanded ? null : 3,

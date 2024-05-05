@@ -9,7 +9,7 @@ class ProfileEditingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(appBar: AppBar(
+    return Scaffold(appBar: AppBar(iconTheme: IconThemeData(color: Colors.white),
       backgroundColor:Color.fromARGB(255, 38, 140, 101), ),
       body: Center(
         child: SingleChildScrollView(

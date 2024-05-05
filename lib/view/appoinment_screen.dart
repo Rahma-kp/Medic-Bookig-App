@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medic/view/payment_confirm_screen.dart';
 
 class AppoinmentScreen extends StatefulWidget {
   const AppoinmentScreen({Key? key});
@@ -12,6 +13,7 @@ class AppoinmentScreen extends StatefulWidget {
 class _AppoinmentScreenState extends State<AppoinmentScreen> {
   late DateTime _selectedDate;
   late List<String> _availableTimeSlots;
+  int _selectedIndex = -1;
 
   @override
   void initState() {
@@ -48,7 +50,8 @@ class _AppoinmentScreenState extends State<AppoinmentScreen> {
             onDateChanged: (DateTime newDate) {
               setState(() {
                 _selectedDate = newDate;
-                _updateAvailableTimeSlots(_selectedDate); 
+                _updateAvailableTimeSlots(_selectedDate);
+                _selectedIndex = -1; // Reset selected index when date changes
               });
             },
           ),
@@ -75,19 +78,31 @@ class _AppoinmentScreenState extends State<AppoinmentScreen> {
                       crossAxisSpacing: 10,
                     ),
                     itemBuilder: (context, index) {
-                      return Container(
-                        height: 50,
-                        width: 70,
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 186, 184, 184),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            _availableTimeSlots[index],
-                            style: GoogleFonts.montserrat(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700,
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _selectedIndex = index;
+                          });
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 70,
+                          decoration: BoxDecoration(
+                            color: _selectedIndex == index
+                                ? Color.fromARGB(255, 29, 141, 102)
+                                : Color.fromARGB(255, 186, 184, 184),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              _availableTimeSlots[index],
+                              style: GoogleFonts.montserrat(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: _selectedIndex == index
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
                             ),
                           ),
                         ),
@@ -95,9 +110,9 @@ class _AppoinmentScreenState extends State<AppoinmentScreen> {
                     },
                   ),
                 ),
-              
                 Center(
-                  child: GestureDetector(onTap: (){},
+                  child: GestureDetector(
+                    onTap: () {Navigator.of(context).push(MaterialPageRoute(builder: (context) => AppoinmentConfirmScreen(),));},
                     child: Container(
                       height: 50,
                       width: 200,

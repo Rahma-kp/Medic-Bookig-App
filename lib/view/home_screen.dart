@@ -64,14 +64,6 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(size.width * 0.02),
-                  child: SmoothPageIndicator(
-                    controller: PageController(),
-                    count: imagesList.length,
-                    effect: SlideEffect(),
-                  ),
-                ),
                 SizedBox(
                   height: size.height * 0.02,
                 ),
@@ -147,7 +139,8 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 10,
                     itemBuilder: (context, index) {
                       return GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => DoctorProfile(),));},
-                        child: Card(elevation: 3,
+                        child: Card(color: Color.fromARGB(255, 255, 255, 255),
+                          elevation: 3,
                           child: Row(
                             children: [
                               Padding(
