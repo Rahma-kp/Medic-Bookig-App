@@ -35,9 +35,10 @@ class _AppoinmentScreenState extends State<AppoinmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor:  Color.fromARGB(255, 38, 140, 101),
         centerTitle: true,
-        title: Text("Appointment Booking"),
+        title: Text("Appointment Booking",style: TextStyle(color: Colors.white),),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

@@ -15,7 +15,8 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
   bool isSearching =false;
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: const Color.fromARGB(255, 231, 230, 227),
+      appBar: AppBar(iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: Color.fromARGB(255, 29, 141, 102),
       actions: [IconButton(onPressed: (){
         setState(() {
           isSearching=!isSearching;

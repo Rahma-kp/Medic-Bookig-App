@@ -71,7 +71,7 @@ class _AppoinmentListScreenState extends State<AppoinmentListScreen> {
                             height: 100,
                             width: 70,
                             decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 81, 157, 81),
+                              color: Color.fromARGB(255, 38, 140, 101),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Center(

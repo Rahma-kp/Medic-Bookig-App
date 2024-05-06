@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medic/view/authenications/Phone_authentication.dart';
 import 'package:medic/view/authenications/login_screen.dart';
+import 'package:medic/widget/bottom_bar.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -63,7 +65,7 @@ class SignUpScreen extends StatelessWidget {
               SizedBox(height: 40,),
               Center(
                 child: GestureDetector(onTap: () {
-                  
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>BottomNavigation (),));
                 },
                   child: Container(
                     height: 50,
@@ -111,7 +113,7 @@ class SignUpScreen extends StatelessWidget {
               SizedBox(height: 20,),
                Center(
                 child: GestureDetector(onTap: () {
-                  
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => PhoneAuthentication(),));
                 },
                   child: Container(
                     height: 50,
@@ -121,7 +123,7 @@ class SignUpScreen extends StatelessWidget {
                         mainAxisAlignment:  MainAxisAlignment.center,
                         children: [Icon(Icons.phone_android),
                           SizedBox(width: 10,),
-                          Text("Login with Google",style: GoogleFonts.montserrat(
+                          Text("Login with phone",style: GoogleFonts.montserrat(
                                     fontSize:15,
                                   ),),
                         ],

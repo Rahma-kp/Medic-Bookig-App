@@ -11,9 +11,13 @@ class AppoinmentConfirmScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 29, 141, 102),
+        iconTheme: IconThemeData(color: Colors.white),
+      ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
               radius: 70,
@@ -60,7 +64,7 @@ class AppoinmentConfirmScreen extends StatelessWidget {
                     TextSpan(
                       text: "at ",
                     ),
-                      TextSpan(
+                    TextSpan(
                       text: " 10.00 ",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -84,8 +88,7 @@ class AppoinmentConfirmScreen extends StatelessWidget {
               "2 Days 5 Hours",
               style: GoogleFonts.montserrat(
                 fontSize: size.width * 0.04,
-                 fontWeight: FontWeight.bold,
-
+                fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 10),
@@ -107,23 +110,36 @@ class AppoinmentConfirmScreen extends StatelessWidget {
                     color: Color.fromARGB(255, 29, 141, 102),
                   ),
                 ),
-                             ],
+              ],
             ),
-            SizedBox(height: 20,),
-             GestureDetector(onTap: (){  
-             
-           showDialog(context: context, builder:(context) => PaymentConfrimMessage(),);
-                },
-               child: Container(height: 60,width: 200,child: Center(
-                 child: Text("Payment", style: GoogleFonts.montserrat(
-                        fontSize: size.width * 0.04,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white
-                      ),)
-               ),
-                    decoration: BoxDecoration(color: Color.fromARGB(255, 29, 141, 102),borderRadius: BorderRadius.circular(20)),),
-             )
-
+            SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => PaymentConfrimMessage(),
+                ).then((_) {
+                  Navigator.popUntil(context, ModalRoute.withName('/'));
+                });
+              },
+              child: Container(
+                height: 60,
+                width: 200,
+                child: Center(
+                    child: Text(
+                  "Payment",
+                  style: GoogleFonts.montserrat(
+                      fontSize: size.width * 0.04,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                )),
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 29, 141, 102),
+                    borderRadius: BorderRadius.circular(20)),
+              ),
+            )
           ],
         ),
       ),

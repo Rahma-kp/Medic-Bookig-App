@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medic/view/authenications/Phone_authentication.dart';
 import 'package:medic/view/authenications/sign_up_screen.dart';
+import 'package:medic/widget/bottom_bar.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -53,7 +55,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 40,),
               Center(
                 child: GestureDetector(onTap: () {
-                  
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>BottomNavigation (),));
                 },
                   child: Container(
                     height: 50,
@@ -101,7 +103,7 @@ class LoginScreen extends StatelessWidget {
               SizedBox(height: 20,),
                Center(
                 child: GestureDetector(onTap: () {
-                  
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) =>PhoneAuthentication() ,));
                 },
                   child: Container(
                     height: 50,

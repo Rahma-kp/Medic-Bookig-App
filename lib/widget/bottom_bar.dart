@@ -70,7 +70,7 @@ class BottomNavigation extends StatelessWidget {
                 label: 'User',
               ),
             ],
-            indicatorColor:Color.fromARGB(255, 33, 186, 127),
+            indicatorColor: Color.fromARGB(255, 38, 140, 101),
             surfaceTintColor:Colors.white
           ),
         ),

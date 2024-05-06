@@ -44,6 +44,7 @@ dependencies:
   shimmer_pro: ^0.0.6
   smooth_page_indicator: ^1.1.0
   booking_calendar: ^1.1.10
+  country_picker: ^2.0.25
 
 dev_dependencies:
   flutter_test:
