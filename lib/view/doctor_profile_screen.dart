@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medic/view/appoinment_screen.dart';
+import 'package:medic/view/appoinment/appoinment_screen.dart';
 
 class DoctorProfile extends StatefulWidget {
   const DoctorProfile({Key? key}) : super(key: key);
@@ -146,7 +146,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
               ],
             ),
           ),
-          GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) =>AppoinmentScreen() ,));},
+          GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) =>AppoinmentBookigScreen() ,));},
             child: Container(child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(child: Text("Book Your Appoinment",style: GoogleFonts.montserrat(

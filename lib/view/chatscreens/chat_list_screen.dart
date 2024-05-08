@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medic/view/chat_screen.dart';
+import 'package:medic/view/chatscreens/chat_screen.dart';
 
 class ChatListingScreen extends StatelessWidget {
   const ChatListingScreen({Key? key});
@@ -9,9 +9,8 @@ class ChatListingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 229, 224, 224),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 228, 226, 226),
+       
         title: Text(
           "Chats",
           style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
@@ -33,15 +32,23 @@ class ChatListingScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Expanded(
             child: ListView.builder(
-              itemCount: 8,
+              itemCount: 4,
               itemBuilder: (context, index) {
                 return Center(
-                  child: GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChatScreen(),));},
-                    child: Card(color:Colors.white,
-                      elevation:6,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ChatScreen(),
+                      ));
+                    },
+                    child: Card(
+                      // color: Colors.white,
+                      // elevation: 6,
                       child: Row(
                         children: [
                           Padding(
@@ -50,21 +57,32 @@ class ChatListingScreen extends StatelessWidget {
                                 backgroundImage: AssetImage("assets/doct.jpeg"),
                                 radius: 40),
                           ),
-                          Column(crossAxisAlignment: CrossAxisAlignment.start,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 "Dr. Ward Warren",
                                 style: GoogleFonts.montserrat(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: size.width * 0.04,),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: size.width * 0.04,
+                                ),
                               ),
-                              Text("Hai, i am inform your health condition",style: TextStyle(overflow:TextOverflow.fade),),
+                              Text(
+                                "Hai, i am inform your health condition",
+                                style: TextStyle(overflow: TextOverflow.fade),
+                              ),
                             ],
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: CircleAvatar(child: Text("1",style: TextStyle(color: Colors.white),),
-                              backgroundColor: Color.fromARGB(255, 45, 185, 99),radius: 13,),
+                            child: CircleAvatar(
+                              child: Text(
+                                "1",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              backgroundColor: Color.fromARGB(255, 45, 185, 99),
+                              radius: 13,
+                            ),
                           )
                         ],
                       ),

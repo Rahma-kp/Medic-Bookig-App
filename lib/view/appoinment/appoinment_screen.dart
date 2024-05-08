@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/view/payment_confirm_screen.dart';
 
-class AppoinmentScreen extends StatefulWidget {
-  const AppoinmentScreen({Key? key});
+class AppoinmentBookigScreen extends StatefulWidget {
+  const AppoinmentBookigScreen({Key? key});
 
   @override
-  State<AppoinmentScreen> createState() => _AppoinmentScreenState();
+  State<AppoinmentBookigScreen> createState() => _AppoinmentBookigScreenState();
 }
 
-class _AppoinmentScreenState extends State<AppoinmentScreen> {
+class _AppoinmentBookigScreenState extends State<AppoinmentBookigScreen> {
   late DateTime _selectedDate;
   late List<String> _availableTimeSlots;
   int _selectedIndex = -1;

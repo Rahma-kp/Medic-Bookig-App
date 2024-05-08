@@ -1,43 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medic/view/doctor_listing_screen.dart';
-import 'package:medic/widget/notification_tab.dart';
 
-class AppoinmentListScreen extends StatefulWidget {
-  const AppoinmentListScreen({Key? key});
+class CancelledAppointments extends StatefulWidget {
+  const CancelledAppointments({Key? key});
 
   @override
-  State<AppoinmentListScreen> createState() => _AppoinmentListScreenState();
+  State<CancelledAppointments> createState() => _CancelledAppoinmentsState();
 }
 
-class _AppoinmentListScreenState extends State<AppoinmentListScreen> {
+class _CancelledAppoinmentsState extends State<CancelledAppointments> {
   int selectedindex = -1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 238, 235, 235),
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 238, 235, 235),
-        title: Text(
-          "My Appointments",
-          style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => DoctorListScreen(),));
-          }, icon: Icon(Icons.add_circle_outline))
-        ],
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CustomTabBar(), 
             Container(
               height: 700,
               child: ListView.builder(
-                itemCount: 10,
+                itemCount: 2,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(

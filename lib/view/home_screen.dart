@@ -10,7 +10,7 @@ import 'package:medic/view/notification_screen.dart';
 import 'package:medic/widget/imgae.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
 
 const double circleAvatarRadiusFraction = 0.085;
 
@@ -21,7 +21,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(backgroundColor:  const Color.fromARGB(255, 231, 230, 227),
+      appBar: AppBar(title: Text("Hai,Rahma"),
+        backgroundColor:  const Color.fromARGB(255, 231, 230, 227),
         actions: [
           IconButton(
             onPressed: () {
@@ -159,7 +160,7 @@ class HomeScreen extends StatelessWidget {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    "neoghjkvbnm",
+                                    "Neuro department",
                                     style: GoogleFonts.montserrat(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w700),
