@@ -17,7 +17,7 @@ class CategoryScreen extends StatelessWidget {
       body: Column(children: [Expanded(
                   child: GridView.builder(
                     padding: EdgeInsets.all(10),
-                    itemCount:categoyImgaes.length,
+                    itemCount:categoryImgaes.length,
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       maxCrossAxisExtent: 150,
                       mainAxisSpacing: 10,
@@ -26,22 +26,27 @@ class CategoryScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => DoctorListScreen(),));},
                         child: Column(
-                          children: [
-                            Container(
-                              height: 50,
-                              width: 70,child: Image.asset(categoyImgaes[index],filterQuality: FilterQuality.high,fit: BoxFit.fill,),
-                              decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 186, 184, 184),
-                                borderRadius: BorderRadius.circular(20),
+                            children: [
+                              Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black,width: 1),
+                                  ),
+                                  height: 70,
+                                  width: 70,
+                                  child: Image.asset(
+                                    categoryImgaes[index],
+                                    filterQuality: FilterQuality.high,
+                                    fit: BoxFit.fill,
+                                  )),
+                              SizedBox(
+                                height: 8,
                               ),
-                            ),
-                            Text(nameCatory[index],style: GoogleFonts.montserrat(
-                      color:  Colors.black,
-                      fontSize: size.width * 0.04,
-                      fontWeight: FontWeight.w600,
-                    ),)
-                          ],
-                        ),
+                              Text(categoryName[index],  style: GoogleFonts.montserrat(
+                                           fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                        ),)
+                            ],
+                          ), 
                       );
                     },
                   ),

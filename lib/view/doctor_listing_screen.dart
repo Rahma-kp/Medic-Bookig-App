@@ -16,14 +16,14 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Color.fromARGB(255, 29, 141, 102),
+        backgroundColor:  Color.fromARGB(255, 122, 182, 159),
       actions: [IconButton(onPressed: (){
         setState(() {
           isSearching=!isSearching;
         });
       }, icon: Icon(Icons.search))],
       ),
-      backgroundColor: const Color.fromARGB(255, 231, 230, 227),
+      backgroundColor: Color.fromARGB(255, 241, 240, 240),
       body: Column(
         children: [
         if (isSearching) ...[
@@ -44,39 +44,80 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
             ),
           ],
            Expanded(
-            child: ListView.builder(
-              itemCount: 8,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Center(
-                    child: GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => DoctorProfile(),));},
-                      child: Card(elevation: 10,
-                        color: Color.fromARGB(255, 203, 201, 201),
-                        child: Row(children: [
-                        Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: CircleAvatar(
-                              backgroundImage: AssetImage("assets/doct1.jpeg"),
-                            radius:40),
-                        ),
-                        SizedBox(width: 10,),
-                          Column(mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                             Text(
-                          "Dr. Ward Warren",
-                          style: GoogleFonts.montserrat(fontSize:20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text("neoghjkvbnm",
-                          style: GoogleFonts.montserrat(fontSize:15,
-                              fontWeight: FontWeight.w700),),
-                          ],)
-                      ],),),
-                    )
-                  ),
-                );
-              },
+            child:Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                      itemCount: 4,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              left: 5, right: 5, bottom: 5, top: 5),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => DoctorProfile(),
+                              ));
+                            },
+                            child: Container(
+                              height: 100,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border:
+                                    Border.all(color: Colors.black, width: 0.5),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    top: 10,
+                                    left: 10,
+                                    child: CircleAvatar(
+                                      radius: 40,
+                                      backgroundImage:
+                                          AssetImage("assets/doct1.jpeg"),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: 15,
+                                    left: 110,
+                                    child: Text(
+                                      "Dr. Ward Warren",
+                                      style: GoogleFonts.montserrat(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: 40,
+                                    left: 110,
+                                    child: Text(
+                                      "Neuro Medicine",
+                                      style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 5,
+                                    right: 10,
+                                    child: Text(
+                                      "05.00 pm to 10.30 pm",
+                                      style: GoogleFonts.montserrat(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
             ),
           ),
         ],

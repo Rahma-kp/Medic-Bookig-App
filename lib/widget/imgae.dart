@@ -1,6 +1,6 @@
 final List<String> imagesList = ["assets/slide1.jpg", "assets/slide2.jpeg"];
 
-final List<String> categoyImgaes = [
+final List<String> categoryImgaes = [
   "assets/emenrgency.png",
   "assets/gayno.jpeg",
   "assets/neuro.jpeg",
@@ -9,7 +9,8 @@ final List<String> categoyImgaes = [
   "assets/dental.png"
 ];
 
-final List<String>nameCatory=[
+
+final List<String>categoryName=[
   "Emergency",
   "Gynaecology",
   "Neurology","Orthopedics",

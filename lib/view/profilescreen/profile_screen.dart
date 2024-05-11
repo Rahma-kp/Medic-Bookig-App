@@ -36,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   offset: Offset(0, 3),
                 ),
               ],
-              color: Color.fromARGB(255, 38, 140, 101),
+              color: Color.fromARGB(255, 71, 153, 124),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(50),
                 bottomRight: Radius.circular(50),
@@ -79,7 +79,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   if(value=="Settings"){
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingScreen(),));
                   }if(value=="Locaion"){
-              // location sett
                   }
                 });
               },
@@ -122,7 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             text2: "163",
             top: 360,
             left: 215,
-            clr: Color.fromARGB(255, 28, 113, 76),
+            clr:  Color.fromARGB(255, 122, 182, 159),
             clr1: Colors.white,
             clr2: Colors.white,
           ),
@@ -131,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             text2: "50",
             top: 480,
             left: 30,
-            clr: Color.fromARGB(255, 28, 113, 76),
+            clr: Color.fromARGB(255, 122, 182, 159),
             clr1: Colors.white,
             clr2: Colors.white,
           ),

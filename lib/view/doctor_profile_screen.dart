@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/view/appoinment/appoinment_screen.dart';
+import 'package:medic/view/payment_confirm_screen.dart';
 
 class DoctorProfile extends StatefulWidget {
   const DoctorProfile({Key? key}) : super(key: key);
@@ -18,14 +19,15 @@ class _DoctorProfileState extends State<DoctorProfile> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar( backgroundColor:const Color.fromARGB(255, 231, 230, 227),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 241, 240, 240),
         centerTitle: true,
         title: Text(
           'Doctor profile',
           style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
         ),
       ),
-      backgroundColor: const Color.fromARGB(255, 231, 230, 227),
+      backgroundColor: Color.fromARGB(255, 241, 240, 240),
       body: Column(
         children: [
           Stack(
@@ -40,11 +42,11 @@ class _DoctorProfileState extends State<DoctorProfile> {
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                       colors: [
-                        Color.fromARGB(255, 154, 156, 154),
-                        Color.fromARGB(255, 108, 138, 126)
+                        Color.fromARGB(255, 125, 167, 150),
+                        Color.fromARGB(255, 227, 225, 225),
+                        Color.fromARGB(255, 255, 255, 255)
                       ],
                     ),
-                    color: Colors.grey,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
@@ -52,10 +54,10 @@ class _DoctorProfileState extends State<DoctorProfile> {
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Container(
-                  height: 300,
+                  height: 290,
                   width: 400,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 29, 141, 102),
+                    color: Color.fromARGB(255, 71, 153, 124),
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
@@ -69,39 +71,72 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 ),
               ),
               Positioned(
-                left: 140,
+                left: 110,
                 top: 180,
-                child: ProfileText(size, "Dr. Courtney Herry"),
+                child: Text(
+                  "Dr. Courtney Herry ",
+                  style: GoogleFonts.montserrat(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
               Positioned(
-                left: 150,
-                top: 210,
-                child: ProfileText(size, "Neuro Medicine"),
+                left: 135,
+                top: 220,
+                child: Text(
+                  "Neuro Medicine",
+                  style: GoogleFonts.montserrat(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
               Positioned(
-                left: 60,
-                bottom: 120,
-                child: Text("Fee"),
-              ),
+                  left: 60,
+                  bottom: 120,
+                  child: Text(
+                    "Fee",
+                    style: GoogleFonts.montserrat(
+                        fontSize: 15,
+                        color: Color.fromARGB(255, 59, 58, 58),
+                        fontWeight: FontWeight.w700),
+                  )),
               Positioned(
                 left: 60,
                 bottom: 80,
-                child: Text("20"),
+                child: Text("₹100",
+                    style: GoogleFonts.montserrat(
+                        fontSize: 25, fontWeight: FontWeight.w700)),
               ),
               Positioned(
-                left: 190,
+                bottom:  50,
+                left: 150,
+                child: Container(
+                  width: 2,
+                  height: 100,
+                  color: Color.fromARGB(255, 81, 80, 80),
+                ),
+              ),
+              Positioned(
+                left: 170,
                 bottom: 120,
-                child: Text("Available On"),
+                child: Text("Available On",style: GoogleFonts.montserrat(
+                        fontSize: 15, fontWeight: FontWeight.w500)),
               ),
               Positioned(
-                left: 190,
+                left: 170,
                 bottom: 90,
-                child: Text("Monday-Saturday"),
+                child: Text("Monday-Saturday",style: GoogleFonts.montserrat(
+                        fontSize: 17, fontWeight: FontWeight.bold)),
               ),
               Positioned(
                 bottom: 60,
-                left: 190,
-                child: Text("5.00 PM to 8.00 PM"),
+                left: 170,
+                child: Text("5.00 PM to 8.00 PM",style: GoogleFonts.montserrat(
+                        fontSize: 17, fontWeight: FontWeight.bold)),
               ),
             ],
           ),
@@ -146,31 +181,36 @@ class _DoctorProfileState extends State<DoctorProfile> {
               ],
             ),
           ),
-          GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) =>AppoinmentBookigScreen() ,));},
-            child: Container(child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Center(child: Text("Book Your Appoinment",style: GoogleFonts.montserrat(
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) =>AppoinmentBookigScreen(),
+              ));
+            },
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    "Book Your Appointment",
+                    style: GoogleFonts.montserrat(
                       color: Colors.white,
                       fontSize: size.width * 0.04,
                       fontWeight: FontWeight.w600,
-                    ),)),
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+              ),
+              height: 55,
+              width: 250,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 71, 153, 124),
+                borderRadius: BorderRadius.circular(20),
+              ),
             ),
-              height: 55,width: 250,
-              decoration:BoxDecoration(color: Color.fromARGB(255, 29, 141, 102),
-                borderRadius: BorderRadius.circular(10)),),
-          )
+          ),
         ],
-      ),
-    );
-  }
-
-  Widget ProfileText(Size size, String text) {
-    return Text(
-      text,
-      style: GoogleFonts.montserrat(
-        color: Colors.white,
-        fontSize: size.width * 0.04,
-        fontWeight: FontWeight.w600,
       ),
     );
   }

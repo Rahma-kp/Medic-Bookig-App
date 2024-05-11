@@ -13,7 +13,7 @@ class TermsConditionScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         iconTheme: const IconThemeData(color: Colors.white),
-        backgroundColor: const Color.fromARGB(255, 38, 140, 101),
+        backgroundColor: Color.fromARGB(255, 122, 182, 159),
       ),
       body: const SingleChildScrollView(
         child: Padding(

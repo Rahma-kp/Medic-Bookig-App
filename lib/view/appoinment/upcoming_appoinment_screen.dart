@@ -1,7 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medic/view/doctor_listing_screen.dart';
-import 'package:medic/widget/notification_tab.dart';
 
 class UpcomingAppointments extends StatefulWidget {
   const UpcomingAppointments({Key? key});
@@ -20,14 +20,14 @@ class _CompletedAppointmentsState extends State<UpcomingAppointments> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 700,
               child: ListView.builder(
-                itemCount: 6,
+                itemCount: 5,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(
-                        left: 20, right: 20, bottom: 10, top: 20),
+                        left: 20, right: 20, bottom: 10, top: 10),
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
@@ -35,74 +35,93 @@ class _CompletedAppointmentsState extends State<UpcomingAppointments> {
                         });
                       },
                       child: Container(
-                        height: 100,
+                        height: 110,
                         decoration: BoxDecoration(
                           color: selectedindex == index
-                              ? Color.fromARGB(255, 33, 186, 127)
-                              : Colors.white,
-                          border:
-                              Border.all(color: Colors.grey, width: 0.2),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 3),
-                            ),
-                          ],
+                              ? Color.fromARGB(255, 71, 153, 124)
+                              : Color.fromARGB(255, 208, 192, 192),
+                          border: Border.all(color: Colors.grey, width: 0.2),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: ListTile(
-                          leading: Container(
-                            height: 100,
-                            width: 70,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 38, 140, 101),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "19 march",
-                                style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.bold,
+                        child: Stack(children: [
+                          Positioned(
+                            left: 15,
+                            top: 10,
+                            child: Container(
+                              height: 90,
+                              width: 80,
+                              decoration: BoxDecoration(
                                   color: selectedindex == index
-                                      ? Colors.white
-                                      : Colors.black,
+                                      ? Color.fromARGB(255, 122, 182, 159)
+                                      : Color.fromARGB(66, 219, 216, 216),
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: Center(
+                                child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "19",
+                                      style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize:20,
+                                        color: selectedindex == index
+                                            ? Colors.white
+                                            : Colors.black,
+                                      ),
+                                    ),
+                                    Text(
+                                      "March",
+                                      style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.bold,
+                                        color: selectedindex == index
+                                            ? Colors.white
+                                            : Colors.black,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
                           ),
-                          title: Column(
-                            children: [
-                              Text(
-                                "Dr. Ward Warren",
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: selectedindex == index
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
+                          Positioned(
+                            left: 120,
+                            top: 20,
+                            child: Text(
+                              "Dr. Ward Warren",
+                              style: GoogleFonts.montserrat(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: selectedindex == index
+                                    ? Colors.white
+                                    : Colors.black,
                               ),
-                              Text(
-                                "Neuro Medicine",
-                                style: GoogleFonts.montserrat(
-                                  color: selectedindex == index
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                              ),
-                              Text(
-                                "10.00 TO 10.30",
-                                style: GoogleFonts.montserrat(
-                                  color: selectedindex == index
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
-                              )
-                            ],
+                            ),
                           ),
-                        ),
+                          Positioned(
+                            left: 120,
+                            top: 50,
+                            child: Text(
+                              "Neuro Medicine",
+                              style: GoogleFonts.montserrat(
+                                fontSize: 16,
+                                color: selectedindex == index
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            left:120,
+                            bottom:15,
+                            child: Text(
+                              "08.00 pm to 10.30pm",
+                              style: GoogleFonts.montserrat(
+                                color: selectedindex == index
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
+                          ),
+                        ]),
                       ),
                     ),
                   );

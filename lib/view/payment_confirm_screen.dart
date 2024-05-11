@@ -12,7 +12,7 @@ class AppoinmentConfirmScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 29, 141, 102),
+        backgroundColor: Color.fromARGB(255, 122, 182, 159),
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Center(
@@ -48,7 +48,8 @@ class AppoinmentConfirmScreen extends StatelessWidget {
                     ),
                     TextSpan(
                       text: "Dr. Courtney Herry ",
-                      style: TextStyle(
+                      style: GoogleFonts.montserrat(
+                        fontSize: size.width * 0.04,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -57,7 +58,8 @@ class AppoinmentConfirmScreen extends StatelessWidget {
                     ),
                     TextSpan(
                       text: "May 05 ",
-                      style: TextStyle(
+                      style: GoogleFonts.montserrat(
+                        fontSize: size.width * 0.04,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -66,7 +68,8 @@ class AppoinmentConfirmScreen extends StatelessWidget {
                     ),
                     TextSpan(
                       text: " 10.00 ",
-                      style: TextStyle(
+                      style: GoogleFonts.montserrat(
+                        fontSize: size.width * 0.04,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -103,9 +106,18 @@ class AppoinmentConfirmScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "100 rupees",
+                  "100",
                   style: GoogleFonts.montserrat(
-                    fontSize: size.width * 0.04,
+                    fontSize: size.width * 0.05,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    color: Color.fromARGB(255, 29, 141, 102),
+                  ),
+                ),
+                Text(
+                  " rupees",
+                  style: GoogleFonts.montserrat(
+                    fontSize: size.width * 0.05,
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 29, 141, 102),
                   ),
@@ -129,14 +141,15 @@ class AppoinmentConfirmScreen extends StatelessWidget {
                 width: 200,
                 child: Center(
                     child: Text(
-                  "Payment",
+                  "Pay Now",
                   style: GoogleFonts.montserrat(
                       fontSize: size.width * 0.04,
                       fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
                       color: Colors.white),
                 )),
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 29, 141, 102),
+                    color: Color.fromARGB(255, 122, 182, 159),
                     borderRadius: BorderRadius.circular(20)),
               ),
             )

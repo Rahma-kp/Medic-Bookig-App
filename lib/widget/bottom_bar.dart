@@ -5,12 +5,13 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:medic/controller/bottom_bar-provider.dart';
 import 'package:medic/view/appoinment/appoinment_tabs.dart';
 import 'package:medic/view/home_screen.dart';
-import 'package:medic/view/profile_screen.dart';
+import 'package:medic/view/profilescreen/profile_screen.dart';
 import 'package:medic/view/chatscreens/chat_list_screen.dart';
 
 import 'package:provider/provider.dart';
 
 class BottomNavigation extends StatelessWidget {
+
   final List<Widget> _pages = [
     HomeScreen(),
     AppointmentScreen(),
@@ -18,8 +19,8 @@ class BottomNavigation extends StatelessWidget {
     ProfileScreen(),
    
   ];
-
-   BottomNavigation({super.key});
+final int selectedIndex;
+   BottomNavigation({super.key, required this.selectedIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,7 @@ class BottomNavigation extends StatelessWidget {
                 label: 'User',
               ),
             ],
-            indicatorColor: Color.fromARGB(255, 38, 140, 101),
+            indicatorColor:Color.fromARGB(255, 71, 153, 124),
             surfaceTintColor:Colors.white
           ),
         ),

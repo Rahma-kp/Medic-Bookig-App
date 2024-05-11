@@ -41,8 +41,8 @@ class DetailsBox extends StatelessWidget {
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
             color: Color.fromARGB(255, 50, 48, 48).withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
+            spreadRadius: 2,
+            blurRadius: 5,
             offset: Offset(0, 3),
           ),
         ], color:clr, borderRadius: BorderRadius.circular(20)),

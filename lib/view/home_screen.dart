@@ -11,9 +11,6 @@ import 'package:medic/widget/imgae.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-
-const double circleAvatarRadiusFraction = 0.085;
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -21,8 +18,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(title: Text("Hai,Rahma"),
-        backgroundColor:  const Color.fromARGB(255, 231, 230, 227),
+      appBar: AppBar(
+        title: Text("Hai,Rahma"),
+        backgroundColor: Color.fromARGB(255, 241, 240, 240),
         actions: [
           IconButton(
             onPressed: () {
@@ -34,7 +32,7 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-      backgroundColor:  const Color.fromARGB(255, 231, 230, 227),
+      backgroundColor: Color.fromARGB(255, 241, 240, 240),
       body: Consumer<HomeCaroselController>(
         builder: (context, value, child) => Padding(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
@@ -45,13 +43,14 @@ class HomeScreen extends StatelessWidget {
                 CarouselSlider(
                   items: imagesList.map((item) {
                     return Container(
-                      margin: EdgeInsets.all(size.width * 0.02),
+                      margin: EdgeInsets.all(size.width * 0.00),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
                         child: Image.asset(
                           item,
                           fit: BoxFit.cover,
                           width: size.width * 0.9,
+                          height: size.height * 0.3,
                         ),
                       ),
                     );
@@ -104,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: 5,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: EdgeInsets.all(5),
+                        padding: EdgeInsets.all(size.width * 0.02),
                         child: GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -113,12 +112,24 @@ class HomeScreen extends StatelessWidget {
                           },
                           child: Column(
                             children: [
-                              CircleAvatar(
-                                radius: 40,
-                                backgroundImage:
-                                    AssetImage("assets/carogry.jpeg"),
+                              Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.black,width: 1),
+                                  ),
+                                  height: 70,
+                                  width: 70,
+                                  child: Image.asset(
+                                    categoryImgaes[index],
+                                    filterQuality: FilterQuality.high,
+                                    fit: BoxFit.fill,
+                                  )),
+                              SizedBox(
+                                height: 8,
                               ),
-                              Text("ALL")
+                              Text(categoryName[index],  style: GoogleFonts.montserrat(
+                                           fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                        ),)
                             ],
                           ),
                         ),
@@ -126,48 +137,72 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                 ),
-
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Top Rated Doctors",style: GoogleFonts.montserrat(
-                          fontSize: size.width * 0.05,
-                          fontWeight: FontWeight.bold), ),
+                  padding: EdgeInsets.all(size.width * 0.02),
+                  child: Text(
+                    "Top Rated Doctors",
+                    style: GoogleFonts.montserrat(
+                        fontSize: size.width * 0.05,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Container(
                   margin: const EdgeInsets.only(bottom: 5, top: 5),
-                  height: size.height * 0.60,
+                  height: size.height * 0.6,
                   child: ListView.builder(
-                    itemCount: 10,
+                    itemCount: 4,
                     itemBuilder: (context, index) {
-                      return GestureDetector(onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => DoctorProfile(),));},
-                        child: Card(color: Color.fromARGB(255, 255, 255, 255),
-                          elevation: 3,
-                          child: Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: CircleAvatar(
-                                  radius: 35,
-                                  backgroundImage: AssetImage("assets/doct.jpeg"),
-                                ),
-                              ),
-                              Column(
-                                children: [
-                                  Text(
-                                    "Dr. Ward Warren",
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    "Neuro department",
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w700),
-                                  )
-                                ],
-                              )
-                            ],
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            left: 5, right: 5, bottom: 5, top: 5),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => DoctorProfile(),));
+                          },
+                          child: Container(
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border:
+                                  Border.all(color: Colors.black, width: 0.5),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child:Stack(children: [ Positioned(top: 10,left: 10,
+                              child: CircleAvatar(
+                                      radius: 40,
+                                      backgroundImage:
+                                          AssetImage("assets/doct1.jpeg"),
+                                    ),
+                            ),
+                                    Positioned(top: 15,left:110,
+                                      child: Text(
+                                        "Dr. Ward Warren",
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                          fontStyle: FontStyle.italic,
+                                        ),
+                                      ),
+                                    ),
+                                      Positioned(top: 40,left: 110,
+                                        child: Text(
+                                        "Neuro Medicine",
+                                        style: GoogleFonts.montserrat(
+                                           fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                        ),
+                                                                            ),
+                                      ),
+                                     Positioned(bottom: 5,right: 10,
+                                       child: Text(
+                                        "05.00 pm to 10.30 pm",
+                                        style: GoogleFonts.montserrat(
+                                          color: Colors.black,
+                                        ),
+                                                                           ),
+                                     )
+                                  ],),
                           ),
                         ),
                       );

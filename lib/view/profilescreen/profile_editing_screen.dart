@@ -20,13 +20,13 @@ class ProfileEditingScreen extends StatelessWidget {
               fontWeight: FontWeight.bold),
         ),
         iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Color.fromARGB(255, 38, 140, 101),
+        backgroundColor: Color.fromARGB(255, 122, 182, 159),
       ),
       body: Center(
         child: SingleChildScrollView(
           child: Form(
             child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20,bottom: 20,top: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -152,7 +152,7 @@ class ProfileEditingScreen extends StatelessWidget {
                                   fontSize: size.width * 0.05,
                                   fontWeight: FontWeight.bold))),
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 38, 140, 101),
+                          color: Color.fromARGB(255, 122, 182, 159),
                           borderRadius: BorderRadius.circular(15)),
                     ),
                   )

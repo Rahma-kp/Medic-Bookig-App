@@ -23,8 +23,8 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Feedback Form'),
+      appBar: AppBar(iconTheme: IconThemeData(color: Colors.white),
+        title: Text('Feedback Form',style: TextStyle(color: Colors.white),),backgroundColor: Color.fromARGB(255, 122, 182, 159),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -109,11 +109,13 @@ class _FeedBackScreenState extends State<FeedBackScreen> {
                         style: GoogleFonts.aBeeZee(
                             color: Colors.white,
                             fontSize: 18,
-                            fontWeight: FontWeight.bold),
+                            fontWeight: FontWeight.bold,
+                            fontStyle: FontStyle.italic,
+                            ),
                       ),
                     ),
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 38, 140, 101),
+                      color: Color.fromARGB(255, 122, 182, 159),
                       borderRadius: BorderRadius.circular(15),
                     ),
                   ),
