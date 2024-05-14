@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medic/controller/authentication_provider.dart';
 import 'package:medic/widget/bottom_bar.dart';
+import 'package:medic/widget/popup_widget.dart';
+import 'package:provider/provider.dart';
 
 class PhoneAuthentication extends StatefulWidget {
   const PhoneAuthentication({Key? key}) : super(key: key);
@@ -11,20 +14,14 @@ class PhoneAuthentication extends StatefulWidget {
 }
 
 class _PhoneAuthenticationState extends State<PhoneAuthentication> {
-  bool _showOTPField = false;
-  final _phoneNumberController = TextEditingController();
-  final _otpController = TextEditingController();
+
+  
   final _formKey = GlobalKey<FormState>();
 
   @override
-  void dispose() {
-    _phoneNumberController.dispose();
-    _otpController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final getProvider = Provider.of<AuthenticationProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 241, 240, 240),
@@ -52,7 +49,7 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                   TextFormField(
-                    controller: _phoneNumberController,
+                    controller:getProvider.phoneController,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.phone_android),
@@ -77,12 +74,20 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
                   Center(
                     child: GestureDetector(
                       onTap: () {
-                        if (_formKey.currentState!.validate()) {
-                          setState(() {
-                            _showOTPField = true;
-                          });
-                        }
-                      },
+                          if (_formKey.currentState!.validate()) {
+                    try {
+                      if (getProvider.phoneController.text.length == 10) {
+                        getProvider.getOtp(
+                          "+${getProvider.selectCountry.phoneCode}${getProvider.phoneController.text}",
+                        );
+                       PopupWidgets().showSuccessSnackbar(context, "OTP sended Successfully");
+                      } else {
+                     PopupWidgets().showErrorSnackbar(context, "Please Check your Mobile number");
+                      }
+                    } catch (e) {}
+                  }
+                  getProvider.showOtp();
+                },
                       child: Container(
                         height: 50,
                         width: 400,
@@ -106,14 +111,14 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
                   SizedBox(
                     height: 20,
                   ),
-                  if (_showOTPField) ...[
+                  if (getProvider.showOtpField) ...[
                     Text(
                       "Verification OTP",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                     TextFormField(
-                      controller: _otpController,
+                      controller:getProvider.otpController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.lock),

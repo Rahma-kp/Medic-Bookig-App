@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medic/controller/authentication_provider.dart';
 import 'package:medic/view/authenications/Phone_authentication.dart';
 import 'package:medic/widget/bottom_bar.dart';
+import 'package:medic/widget/popup_widget.dart';
+import 'package:provider/provider.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key});
 
   @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _signUpFormKey = GlobalKey<FormState>();
-
+    final getProvider =
+        Provider.of<AuthenticationProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 241, 240, 240),
@@ -36,6 +45,7 @@ class SignUpScreen extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 ),
                 TextFormField(
+                  controller: getProvider.userNameController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.account_circle_outlined),
                       hintText: "Enter your name",
@@ -56,6 +66,7 @@ class SignUpScreen extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 ),
                 TextFormField(
+                  controller: getProvider.emailController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.mail_outlined),
                       hintText: "Enter your email",
@@ -75,6 +86,7 @@ class SignUpScreen extends StatelessWidget {
                 ),
                 TextFormField(
                   obscureText: true,
+                  controller: getProvider.passwordController,
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.lock_outline_sharp),
                       hintText: "Enter your password",
@@ -87,17 +99,47 @@ class SignUpScreen extends StatelessWidget {
                     return null;
                   },
                 ),
+                SizedBox(height: 10),
+                Text(
+                  " Confirm Password",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                ),
+                TextFormField(
+                  obscureText: true,
+                  controller: getProvider.confirmPasswordController,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock_outline_sharp),
+                      hintText: "Enter your confirm password",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5))),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your confirm password';
+                    }
+                    return null;
+                  },
+                ),
                 SizedBox(height: 20),
                 Center(
                   child: GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       if (_signUpFormKey.currentState!.validate()) {
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (context) => BottomNavigation(
-                              selectedIndex: 0,
-                            ),)
-                       ,(route) => false,);
+                        try {
+                          getProvider.signUpWithEmail(
+                              getProvider.emailController.text,
+                              getProvider.passwordController.text);
+                          Navigator.of(context)
+                              .pushAndRemoveUntil(MaterialPageRoute(
+                            builder: (context) =>
+                                BottomNavigation(selectedIndex: 0),
+                          ), (Route<dynamic> route) => false,);
+                          PopupWidgets().showSuccessSnackbar(
+                              context, 'Account has been created');
+                          getProvider.clearControllers();
+                        } catch (e) {
+                          PopupWidgets().showErrorSnackbar(
+                              context, 'Account not created, try again');
+                        }
                       }
                     },
                     child: Container(
@@ -123,7 +165,9 @@ class SignUpScreen extends StatelessWidget {
                 SizedBox(height: 20),
                 Center(
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      getProvider.googleSignIn();
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -145,7 +189,7 @@ class SignUpScreen extends StatelessWidget {
                 SizedBox(height: 20),
                 Center(
                   child: GestureDetector(
-                    onTap: () {
+                    onTap: () { 
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => PhoneAuthentication(),

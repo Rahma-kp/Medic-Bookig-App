@@ -1,5 +1,6 @@
 
   import 'package:flutter/material.dart';
+import 'package:medic/service/authentication_service.dart';
 import 'package:medic/view/authenications/login_screen.dart';
 
 void showLogoutDialog(BuildContext context) {
@@ -18,6 +19,7 @@ void showLogoutDialog(BuildContext context) {
             ),
             TextButton(
               onPressed: () {
+                AuthService().signOutEmail();
                    Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                             builder: (context) => LoginScreen(),

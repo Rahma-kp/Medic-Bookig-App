@@ -8,7 +8,7 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: AppBar( title:poppinsHeadText(
-            text: 'My Appointment',
+            text: 'Notifications',
             fontSize: 20,
           ),
        backgroundColor:  const Color.fromARGB(255, 231, 230, 227),

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "539104168258",
+    "project_id": "medical-9d533",
+    "storage_bucket": "medical-9d533.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539104168258:android:412a3bed167d231caea0db",
+        "android_client_info": {
+          "package_name": "com.example.medic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "539104168258-u2kmkmpdl1c3c8s7u8tsbhglf98go0es.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.medic",
+            "certificate_hash": "45d06ab048c89a82372727188585e347ef32798f"
+          }
+        },
+        {
+          "client_id": "539104168258-qcj7ulo5mbbiclnv9tahgevval5r3gle.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAk5gOpt2SgPf9Y5PVdFVURSEhQAUSH04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "539104168258-qcj7ulo5mbbiclnv9tahgevval5r3gle.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "539104168258-1f70bvq2qsc9sqd9iem6bk66bjmrfs7s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.medic"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

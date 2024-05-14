@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:medic/controller/bottom_bar-provider.dart';
 import 'package:medic/view/appoinment/appoinment_tabs.dart';
-import 'package:medic/view/home_screen.dart';
-import 'package:medic/view/profilescreen/profile_screen.dart';
+import 'package:medic/view/home_screens/home_screen.dart';
+import 'package:medic/view/user_setting_screens/profile_screen.dart';
 import 'package:medic/view/chatscreens/chat_list_screen.dart';
 
 import 'package:provider/provider.dart';

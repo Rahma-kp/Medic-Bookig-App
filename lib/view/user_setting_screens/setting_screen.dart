@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medic/service/authentication_service.dart';
 import 'package:medic/view/authenications/login_screen.dart';
-import 'package:medic/view/profilescreen/feed_back_screen.dart';
-import 'package:medic/view/profilescreen/profile_editing_screen.dart';
-import 'package:medic/view/profilescreen/terms_conditions_screen.dart';
-import 'package:medic/view/profilescreen/widget/logout_dailoguebox.dart';
+import 'package:medic/view/user_setting_screens/feed_back_screen.dart';
+import 'package:medic/view/user_setting_screens/profile_editing_screen.dart';
+import 'package:medic/view/user_setting_screens/terms_conditions_screen.dart';
+import 'package:medic/view/user_setting_screens/widget/logout_dailoguebox.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});

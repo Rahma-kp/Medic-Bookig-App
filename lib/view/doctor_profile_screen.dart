@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/view/appoinment/appoinment_screen.dart';
-import 'package:medic/view/payment_confirm_screen.dart';
+// import 'package:medic/view/appoinment/payment_confirm_screen.dart';
 
 class DoctorProfile extends StatefulWidget {
   const DoctorProfile({Key? key}) : super(key: key);
