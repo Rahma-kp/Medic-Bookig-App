@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/controller/authentication_provider.dart';
-import 'package:medic/view/authenications/Phone_authentication.dart';
+import 'package:medic/view/user/authenications/Phone_authentication.dart';
 import 'package:medic/widget/bottom_bar.dart';
 import 'package:medic/widget/popup_widget.dart';
 import 'package:provider/provider.dart';
@@ -128,11 +128,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           getProvider.signUpWithEmail(
                               getProvider.emailController.text,
                               getProvider.passwordController.text);
-                          Navigator.of(context)
-                              .pushAndRemoveUntil(MaterialPageRoute(
-                            builder: (context) =>
-                                BottomNavigation(selectedIndex: 0),
-                          ), (Route<dynamic> route) => false,);
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  BottomNavigation(selectedIndex: 0),
+                            ),
+                            (Route<dynamic> route) => false,
+                          );
                           PopupWidgets().showSuccessSnackbar(
                               context, 'Account has been created');
                           getProvider.clearControllers();
@@ -166,7 +168,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Center(
                   child: InkWell(
                     onTap: () {
-                      getProvider.googleSignIn();
+                      getProvider.googleSignIn(context);
+                      
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -189,7 +192,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: 20),
                 Center(
                   child: GestureDetector(
-                    onTap: () { 
+                    onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => PhoneAuthentication(),

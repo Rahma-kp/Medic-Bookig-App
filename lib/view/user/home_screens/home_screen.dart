@@ -1,12 +1,10 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:medic/controller/carousel_controller.dart';
-import 'package:medic/view/home_screens/catogory_screen.dart';
-import 'package:medic/view/doctor_listing_screen.dart';
-import 'package:medic/view/doctor_profile_screen.dart';
-import 'package:medic/view/home_screens/notification_screen.dart';
+import 'package:medic/view/user/home_screens/catogory_screen.dart';
+import 'package:medic/view/user/doctor_listing_screen.dart';
+import 'package:medic/view/user/home_screens/notification_screen.dart';
+import 'package:medic/view/user/home_screens/widget/carousel_widget.dart';
+import 'package:medic/view/user/home_screens/widget/tope_doctors_listview.dart';
 import 'package:medic/widget/imgae.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -40,30 +38,7 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CarouselSlider(
-                  items: imagesList.map((item) {
-                    return Container(
-                      margin: EdgeInsets.all(size.width * 0.00),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        child: Image.asset(
-                          item,
-                          fit: BoxFit.cover,
-                          width: size.width * 0.9,
-                          height: size.height * 0.3,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    enlargeCenterPage: true,
-                    aspectRatio: 2.0,
-                    onPageChanged: (index, reason) {
-                      value.carouselChange(index);
-                    },
-                  ),
-                ),
+                homeCarouselSlider(size: size),
                 SizedBox(
                   height: size.height * 0.02,
                 ),
@@ -146,69 +121,7 @@ class HomeScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 5, top: 5),
-                  height: size.height * 0.6,
-                  child: ListView.builder(
-                    itemCount: 4,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                            left: 5, right: 5, bottom: 5, top: 5),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => DoctorProfile(),));
-                          },
-                          child: Container(
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border:
-                                  Border.all(color: Colors.black, width: 0.5),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child:Stack(children: [ Positioned(top: 10,left: 10,
-                              child: CircleAvatar(
-                                      radius: 40,
-                                      backgroundImage:
-                                          AssetImage("assets/doct1.jpeg"),
-                                    ),
-                            ),
-                                    Positioned(top: 15,left:110,
-                                      child: Text(
-                                        "Dr. Ward Warren",
-                                        style: GoogleFonts.montserrat(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                          fontStyle: FontStyle.italic,
-                                        ),
-                                      ),
-                                    ),
-                                      Positioned(top: 40,left: 110,
-                                        child: Text(
-                                        "Neuro Medicine",
-                                        style: GoogleFonts.montserrat(
-                                           fontWeight: FontWeight.w500,
-                                          color: Colors.black,
-                                        ),
-                                                                            ),
-                                      ),
-                                     Positioned(bottom: 5,right: 10,
-                                       child: Text(
-                                        "05.00 pm to 10.30 pm",
-                                        style: GoogleFonts.montserrat(
-                                          color: Colors.black,
-                                        ),
-                                                                           ),
-                                     )
-                                  ],),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                )
+                DoctorsListView(size: size)
               ],
             ),
           ),

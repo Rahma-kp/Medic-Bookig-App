@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/controller/authentication_provider.dart';
@@ -14,14 +13,12 @@ class PhoneAuthentication extends StatefulWidget {
 }
 
 class _PhoneAuthenticationState extends State<PhoneAuthentication> {
-
-  
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final getProvider = Provider.of<AuthenticationProvider>(context, listen: false);
-
+    final getProvider =
+        Provider.of<AuthenticationProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 241, 240, 240),
@@ -49,7 +46,7 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
                   TextFormField(
-                    controller:getProvider.phoneController,
+                    controller: getProvider.phoneController,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.phone_android),
@@ -73,21 +70,23 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
                   ),
                   Center(
                     child: GestureDetector(
-                      onTap: () {
-                          if (_formKey.currentState!.validate()) {
-                    try {
-                      if (getProvider.phoneController.text.length == 10) {
-                        getProvider.getOtp(
-                          "+${getProvider.selectCountry.phoneCode}${getProvider.phoneController.text}",
-                        );
-                       PopupWidgets().showSuccessSnackbar(context, "OTP sended Successfully");
-                      } else {
-                     PopupWidgets().showErrorSnackbar(context, "Please Check your Mobile number");
-                      }
-                    } catch (e) {}
-                  }
-                  getProvider.showOtp();
-                },
+                      onTap: ()async {
+                        if (_formKey.currentState!.validate()) {
+                          try {
+                            if (getProvider.phoneController.text.length == 10) {
+                              getProvider.getOtp(
+                                "+${getProvider.selectCountry.phoneCode}${getProvider.phoneController.text}",
+                              );
+                              await getProvider.showOtp();
+                              PopupWidgets().showSuccessSnackbar(
+                                  context, "OTP sent Successfully");
+                            } 
+                          } catch (e) {
+                              getProvider.clearControllers();
+                            PopupWidgets().showErrorSnackbar(context, 'some error there!');
+                          }
+                        }
+                      },
                       child: Container(
                         height: 50,
                         width: 400,
@@ -118,7 +117,7 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
                     TextFormField(
-                      controller:getProvider.otpController,
+                      controller: getProvider.otpController,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.lock),
@@ -140,11 +139,23 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
                     ),
                     Center(
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
-                                builder: (context) =>
-                                    BottomNavigation(selectedIndex: 0)) ,(route) => false,);
+                            try {
+                              await getProvider.verifyOtp(
+                                  getProvider.otpController.text, context);
+                              Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      BottomNavigation(selectedIndex: 0),
+                                ),
+                                (route) => false,
+                              );
+                              getProvider.clearControllers();
+                            } catch (e) {
+                              PopupWidgets().showErrorSnackbar(
+                                  context, "Failed to verify OTP");
+                            }
                           }
                         },
                         child: Container(

@@ -1,8 +1,8 @@
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:medic/controller/bottom_bar-provider.dart';
-import 'package:medic/view/authenications/login_screen.dart';
-import 'package:medic/view/doctor_profile_screen.dart';
+import 'package:medic/view/user/authenications/login_screen.dart';
+import 'package:medic/view/user/doctor_profile_screen.dart';
 import 'package:medic/widget/text_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +24,7 @@ Widget allDoctorsContainer(size, {bool? isAdmin, circleAvatarRadius}) {
           radius: circleAvatarRadius,
           backgroundColor: Colors.white,
           backgroundImage:
-              const AssetImage('assets/avatar-removebg-preview.png'),
+              const AssetImage('assets/doct.jpeg'),
         ),
         Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,9 +143,9 @@ Widget profileScreenContainer(context,
 Widget doctorDetailsShowingContainer(context, size, {width}) {
   return GestureDetector(
     onTap: () {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const DoctorProfile()));
-    },
+    //   Navigator.push(context,
+    //       MaterialPageRoute(builder: (context) => const DoctorProfile(doctor:)));
+     },
     child: Container(
       height: size.height * .16,
       width: width,

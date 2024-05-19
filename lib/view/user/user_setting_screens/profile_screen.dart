@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medic/view/user_setting_screens/setting_screen.dart';
+import 'package:medic/view/user/user_setting_screens/setting_screen.dart';
 import 'package:medic/widget/profile_details_container.dart';
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

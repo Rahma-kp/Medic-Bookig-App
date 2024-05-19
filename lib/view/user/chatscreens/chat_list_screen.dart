@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medic/view/chatscreens/chat_screen.dart';
+import 'package:medic/view/user/chatscreens/chat_screen.dart';
 
 class ChatListingScreen extends StatelessWidget {
   const ChatListingScreen({Key? key});

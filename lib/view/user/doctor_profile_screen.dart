@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medic/view/appoinment/appoinment_screen.dart';
-// import 'package:medic/view/appoinment/payment_confirm_screen.dart';
+import 'package:medic/model/doctor_model.dart';
+import 'package:medic/service/doctor_service.dart';
+import 'package:medic/view/user/appoinment/appoinment_screen.dart';
+
 
 class DoctorProfile extends StatefulWidget {
-  const DoctorProfile({Key? key}) : super(key: key);
+  const DoctorProfile({Key? key, required DoctorModel doctor}) : super(key: key);
 
   @override
   State<DoctorProfile> createState() => _DoctorProfileState();
@@ -14,6 +16,17 @@ class DoctorProfile extends StatefulWidget {
 
 class _DoctorProfileState extends State<DoctorProfile> {
   bool isSummaryExpanded = false;
+    late Map<String, dynamic> doctorData;
+    late final DoctorService _doctorService;
+
+    
+  @override
+  void initState() {
+    super.initState();
+    _doctorService = DoctorService();
+    isSummaryExpanded = false;
+    doctorData = {}; 
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +80,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
                 top: 50,
                 child: CircleAvatar(
                   radius: 60,
-                  backgroundImage: AssetImage("assets/doct.jpeg"),
+                  backgroundImage: AssetImage("assets/doct"),
                 ),
               ),
               Positioned(

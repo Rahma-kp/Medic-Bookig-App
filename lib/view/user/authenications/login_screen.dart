@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/controller/authentication_provider.dart';
-import 'package:medic/view/authenications/Phone_authentication.dart';
-import 'package:medic/view/authenications/sign_up_screen.dart';
+import 'package:medic/view/user/authenications/Phone_authentication.dart';
+import 'package:medic/view/user/authenications/sign_up_screen.dart';
 import 'package:medic/widget/bottom_bar.dart';
 import 'package:medic/widget/navigation.dart';
 import 'package:medic/widget/popup_widget.dart';
@@ -13,10 +13,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isShowing = true;
     final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-    final getProvider =
-        Provider.of<AuthenticationProvider>(context, listen: false);
+    final getProvider = Provider.of<AuthenticationProvider>(context, listen: false);
 
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 241, 240, 240),
@@ -35,9 +33,7 @@ class LoginScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   Text("Welcome back! Please enter your details"),
-                  SizedBox(
-                    height: 40,
-                  ),
+                  SizedBox(height: 40),
                   TextFormField(
                     controller: getProvider.userNameController,
                     decoration: InputDecoration(
@@ -111,21 +107,23 @@ class LoginScreen extends StatelessWidget {
                             await getProvider.signInWithEmail(
                                 getProvider.emailController.text,
                                 getProvider.passwordController.text);
-                            PopupWidgets()
-                                .showSuccessSnackbar(context, 'user logid in');
+                            PopupWidgets().showSuccessSnackbar(context, 'User logged in');
                             NavigatorWidget().pushReplacement(
                                 context, BottomNavigation(selectedIndex: 0));
                             getProvider.clearControllers();
                           } catch (e) {
                             getProvider.clearControllers();
-                            PopupWidgets()
-                                .showErrorSnackbar(context, 'User not found!');
+                            PopupWidgets().showErrorSnackbar(context, 'User not found!');
                           }
                         }
                       },
                       child: Container(
                         height: 55,
                         width: 400,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Color.fromARGB(255, 30, 138, 97),
+                        ),
                         child: Center(
                           child: Text(
                             "Login",
@@ -136,18 +134,15 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Color.fromARGB(255, 30, 138, 97),
-                        ),
                       ),
                     ),
                   ),
                   SizedBox(height: 20),
                   Center(
                     child: InkWell(
-                      onTap: () { 
-                        getProvider.googleSignIn();
+                      onTap: () async {
+                       getProvider.googleSignIn(context);
+                       
                       },
                       child: Center(
                         child: Row(
@@ -208,14 +203,15 @@ class LoginScreen extends StatelessWidget {
                           ));
                         },
                         child: Text(
-                          "Sign-Up",
+                          " Sign-Up",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 30, 138, 97),
-                              fontWeight: FontWeight.bold),
+                            color: Color.fromARGB(255, 30, 138, 97),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

@@ -2,12 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medic/service/authentication_service.dart';
-import 'package:medic/view/authenications/login_screen.dart';
-import 'package:medic/view/user_setting_screens/feed_back_screen.dart';
-import 'package:medic/view/user_setting_screens/profile_editing_screen.dart';
-import 'package:medic/view/user_setting_screens/terms_conditions_screen.dart';
-import 'package:medic/view/user_setting_screens/widget/logout_dailoguebox.dart';
+import 'package:medic/view/user/authenications/login_screen.dart';
+import 'package:medic/view/user/user_setting_screens/feed_back_screen.dart';
+import 'package:medic/view/user/user_setting_screens/profile_editing_screen.dart';
+import 'package:medic/view/user/user_setting_screens/terms_conditions_screen.dart';
+import 'package:medic/view/user/user_setting_screens/widget/logout_dailoguebox.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -15,13 +14,14 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             Padding(
@@ -41,7 +41,7 @@ class SettingScreen extends StatelessWidget {
                     width: 400,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: Color.fromARGB(255, 122, 182, 159),
+                      color: const Color.fromARGB(255, 122, 182, 159),
                     ),
                   ),
                   Positioned(
@@ -50,10 +50,10 @@ class SettingScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ProfileEditingScreen(),
+                            builder: (context) => const ProfileEditingScreen(),
                           ));
                         },
-                        child: Row(
+                        child: const Row(
                           children: [
                             Icon(
                               Icons.account_circle_outlined,
@@ -65,7 +65,8 @@ class SettingScreen extends StatelessWidget {
                             ),
                             Text(
                               "Profile",
-                              style: TextStyle(color: Colors.white, fontSize: 20),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
                             )
                           ],
                         ),
@@ -79,7 +80,7 @@ class SettingScreen extends StatelessWidget {
                             builder: (context) => FeedBackScreen(),
                           ));
                         },
-                        child: Row(
+                        child: const Row(
                           children: [
                             Icon(
                               Icons.info_outline_rounded,
@@ -91,7 +92,8 @@ class SettingScreen extends StatelessWidget {
                             ),
                             Text(
                               "Feed Back",
-                              style: TextStyle(color: Colors.white, fontSize: 20),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
                             )
                           ],
                         ),
@@ -102,10 +104,10 @@ class SettingScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => TermsConditionScreen(),
+                            builder: (context) => const TermsConditionScreen(),
                           ));
                         },
-                        child: Row(
+                        child: const Row(
                           children: [
                             Icon(
                               Icons.inventory_rounded,
@@ -117,7 +119,8 @@ class SettingScreen extends StatelessWidget {
                             ),
                             Text(
                               "Terms & Conditions",
-                              style: TextStyle(color: Colors.white, fontSize: 20),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
                             )
                           ],
                         ),
@@ -125,7 +128,7 @@ class SettingScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
@@ -137,7 +140,7 @@ class SettingScreen extends StatelessWidget {
                     width: 400,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Color.fromARGB(255, 122, 182, 159),
+                      color: const Color.fromARGB(255, 122, 182, 159),
                     ),
                   ),
                   Positioned(
@@ -146,10 +149,10 @@ class SettingScreen extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
+                            builder: (context) => const LoginScreen(),
                           ));
                         },
-                        child: Row(
+                        child: const Row(
                           children: [
                             Icon(
                               Icons.restore,
@@ -161,7 +164,8 @@ class SettingScreen extends StatelessWidget {
                             ),
                             Text(
                               "Reset the app",
-                              style: TextStyle(color: Colors.white, fontSize: 20),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
                             )
                           ],
                         ),
@@ -171,9 +175,9 @@ class SettingScreen extends StatelessWidget {
                       left: 10,
                       child: GestureDetector(
                           onTap: () {
-                        showLogoutDialog(context);
+                            showLogoutDialog(context);
                           },
-                          child: Row(
+                          child: const Row(
                             children: [
                               Icon(
                                 Icons.logout_outlined,
@@ -185,7 +189,8 @@ class SettingScreen extends StatelessWidget {
                               ),
                               Text(
                                 "Log Out",
-                                style: TextStyle(color: Colors.white, fontSize: 20),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
                               )
                             ],
                           ))),
@@ -197,4 +202,6 @@ class SettingScreen extends StatelessWidget {
       ),
     );
   }
+
+  
 }

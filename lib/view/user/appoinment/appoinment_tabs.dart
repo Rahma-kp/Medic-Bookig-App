@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medic/view/appoinment/canceld_appinments.dart';
-import 'package:medic/view/appoinment/upcoming_appoinment_screen.dart';
-import 'package:medic/view/doctor_listing_screen.dart';
+import 'package:medic/view/user/appoinment/canceld_appinments.dart';
+import 'package:medic/view/user/appoinment/upcoming_appoinment_screen.dart';
+import 'package:medic/view/user/doctor_listing_screen.dart';
 import 'package:medic/widget/text_widget.dart';
 import 'completed_appoinment_screen.dart';
 

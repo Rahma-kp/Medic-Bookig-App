@@ -1,11 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:medic/controller/admin_provider.dart';
 import 'package:medic/controller/authentication_provider.dart';
 import 'package:medic/controller/bottom_bar-provider.dart';
 import 'package:medic/controller/carousel_controller.dart';
+import 'package:medic/controller/doctor_list_provider.dart';
+import 'package:medic/controller/user_provider.dart';
 import 'package:medic/firebase_options.dart';
-import 'package:medic/view/authenications/splash_screen.dart';
-import 'package:medic/widget/bottom_bar.dart';
+import 'package:medic/splash_screen.dart';
+import 'package:medic/view/adminside/admin_bottombar.dart';
 import 'package:provider/provider.dart';
 
 void main()async {
@@ -25,14 +28,17 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (context) => BottomBarProvider(),
           ),
-          ChangeNotifierProvider(create: (context) =>AuthenticationProvider() ,)
+          ChangeNotifierProvider(create: (context) =>AuthenticationProvider() ,),
+          ChangeNotifierProvider(create: (context) => AdminProvider(),),
+          ChangeNotifierProvider(create: (context) => UserProvider(),),
+          ChangeNotifierProvider(create: (context) => doctorListProvide(),)
         ],
         child: MaterialApp(
           theme: ThemeData(
             popupMenuTheme: PopupMenuThemeData(color:  Color.fromARGB(255, 28, 113, 76),)),
-          //  home: BottomNavigation(selectedIndex: 0,),.
           home: SplashScreen(),
-          // home: LoginScreen(),
+      
+          // home: AdminBottomBar(),
           debugShowCheckedModeBanner: false,
         ));
   }

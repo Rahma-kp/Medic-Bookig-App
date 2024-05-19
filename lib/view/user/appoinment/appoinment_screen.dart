@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medic/view/appoinment/payment_confirm_screen.dart';
+import 'package:medic/view/user/appoinment/payment_confirm_screen.dart';
 
 class AppoinmentBookigScreen extends StatefulWidget {
   const AppoinmentBookigScreen({Key? key});

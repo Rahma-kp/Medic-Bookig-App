@@ -49,27 +49,7 @@ Widget doctorExperienceContainer({height, width, valueText, headText}) {
   );
 }
 
-Widget homeCategory(context, size, {circleAvatarRadius}) {
-  return SizedBox(
-    height: size.height * .275,
-    width: size.width * .9,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        categoryCircle(context, "assets/carogry.jpeg",
-            category: "All", circleRadius: circleAvatarRadius),
-        categoryCircle(context, 'assets/carogry.jpeg',
-            category: 'General', circleRadius: circleAvatarRadius),
-        categoryCircle(context, 'assets/carogry.jpeg',
-            category: 'Dentist', circleRadius: circleAvatarRadius),
-        categoryCircle(context, 'assets/carogry.jpeg',
-            category: 'Cardiology', circleRadius: circleAvatarRadius),
-        categoryCircle(context, 'assets/carogry.jpeg',
-            category: 'ortho', circleRadius: circleAvatarRadius),
-      ],
-    ),
-  );
-}
+// 
 
 Widget homeAppBar(size) {
   return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
