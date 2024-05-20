@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medic/view/user/authenications/login_screen.dart';
+import 'package:medic/view/authentication/login_screen.dart';
 
 class UserProvider extends ChangeNotifier {
   TextEditingController searchController = TextEditingController();

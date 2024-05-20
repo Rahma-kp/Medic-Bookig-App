@@ -1,8 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:medic/controller/authentication_provider.dart';
-import 'package:medic/service/authentication_service.dart';
-import 'package:medic/view/user/authenications/login_screen.dart';
+import 'package:medic/view/authentication/login_screen.dart';
 import 'package:medic/widget/navigation.dart';
 import 'package:provider/provider.dart';
 
@@ -12,14 +11,14 @@ void showLogoutDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("Logout"),
-        content: Text("Do you want to logout?"),
+        title: const Text("Logout"),
+        content: const Text("Do you want to logout?"),
         actions: [
           TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text(
+            child: const Text(
               "No",
               style: TextStyle(color: Colors.green, fontSize: 15),
             ),
@@ -29,9 +28,9 @@ void showLogoutDialog(BuildContext context) {
               getProvider.signOutWithEmail();
               getProvider.googleSignOut();
               getProvider.onTabTapped(0);
-              NavigatorWidget().pushRemoveUntil(context, LoginScreen());
+              NavigatorWidget().pushRemoveUntil(context, const LoginScreen());
             },
-            child: Text(
+            child: const Text(
               "Yes",
               style: TextStyle(color: Colors.red, fontSize: 15),
             ),

@@ -40,6 +40,7 @@ class AuthenticationProvider extends ChangeNotifier {
 
   Future<void> signOutWithEmail() async {
     return await authService.signOutEmail();
+    
   }
 
   Future<void> googleSignIn(BuildContext context) async {

@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:medic/view/adminside/admin_home.dart';
-import 'package:medic/view/adminside/admin_profile.dart';
-import 'package:medic/view/adminside/doctors_adding_admin.dart';
 
 class BottomBarProvider extends ChangeNotifier {
-  int userCurrentIndex = 0;
-  int adminCurrentIndex = 0;
+  int _currentIndex = 0;
+  int initIndex = 0;
   
-  navigatePage(int index) {
-    userCurrentIndex = index;
+  int get currentIndex => _currentIndex;
+
+  void setInitIndex(int index) {
+    initIndex = index;
+    _currentIndex = index;
+  }
+
+  void navigatePage(int index) {
+    _currentIndex = index;
     notifyListeners();
   }
-      void adminOnTap(int index) {
-    adminCurrentIndex = index;
-    notifyListeners();
-  }
-  List adminScreens = [
-    const AdminHomeScreen(),
-    const DoctorAddingScreen(),
-    const AdminProfileScreen(),
-  ];
 }

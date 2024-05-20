@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/controller/authentication_provider.dart';
-import 'package:medic/view/user/authenications/login_screen.dart';
+import 'package:medic/view/authentication/login_screen.dart';
 import 'package:medic/widget/bottom_bar.dart';
 import 'package:medic/widget/navigation.dart';
 import 'package:provider/provider.dart';

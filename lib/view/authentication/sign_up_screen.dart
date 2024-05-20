@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/controller/authentication_provider.dart';
-import 'package:medic/view/user/authenications/Phone_authentication.dart';
+import 'package:medic/view/authentication/Phone_authentication.dart';
 import 'package:medic/widget/bottom_bar.dart';
 import 'package:medic/widget/popup_widget.dart';
 import 'package:provider/provider.dart';

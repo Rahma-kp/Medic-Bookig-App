@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/model/doctor_model.dart';
-import 'package:medic/view/user/doctor_profile_screen.dart';
+import 'package:medic/view/appoinment/doctor_profile_screen.dart';
 
 class DoctorsListView extends StatelessWidget {
   const DoctorsListView({

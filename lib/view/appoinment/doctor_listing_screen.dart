@@ -1,14 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/controller/doctor_list_provider.dart';
 import 'package:medic/model/doctor_model.dart';
 import 'package:medic/service/doctor_service.dart';
-import 'package:medic/view/user/doctor_profile_screen.dart';
+import 'package:medic/view/appoinment/doctor_profile_screen.dart';
 import 'package:provider/provider.dart';
 
 class DoctorListScreen extends StatefulWidget {
-  const DoctorListScreen({super.key});
+  final String? category;
+
+  const DoctorListScreen({Key? key, this.category}) : super(key: key);
 
   @override
   State<DoctorListScreen> createState() => _DoctorListScreenState();
@@ -17,48 +18,70 @@ class DoctorListScreen extends StatefulWidget {
 class _DoctorListScreenState extends State<DoctorListScreen> {
   final DoctorService _doctorService = DoctorService();
   late Future<List<DoctorModel>> _doctorListFuture;
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
-    _doctorListFuture = _doctorService.getAllDoctors();
     super.initState();
+    _fetchDoctors();
+  }
+
+  void _fetchDoctors() {
+    setState(() {
+      _doctorListFuture = widget.category != null
+          ? _doctorService.getDoctorsByCategory(widget.category!)
+          : _doctorService.getAllDoctors();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final getProvider = Provider.of<doctorListProvide>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color.fromARGB(255, 122, 182, 159),
         actions: [
-          IconButton(
-              onPressed: () {
-                getProvider.seachShowing();
-              },
-              icon: Icon(Icons.search))
+          Consumer<DoctorListProvider>(
+            builder: (context, doctorListProvider, child) {
+              return IconButton(
+                onPressed: () {
+                  doctorListProvider.toggleSearch();
+                },
+                icon: Icon(Icons.search),
+              );
+            },
+          ),
         ],
       ),
       backgroundColor: Color.fromARGB(255, 241, 240, 240),
       body: Column(
         children: [
-          if (getProvider.isSearching) ...[
-            Padding(
-              padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  hintText: "Search for doctors",
-                  filled: true,
-                  fillColor: Color.fromARGB(255, 193, 190, 190),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(20),
+          Consumer<DoctorListProvider>(
+            builder: (context, doctorListProvider, child) {
+              if (doctorListProvider.isSearching) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: TextFormField(
+                    controller: _searchController,
+                    onChanged: (query) {
+                      doctorListProvider.searchDoctors(query);
+                    },
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      hintText: "Search for doctors",
+                      filled: true,
+                      fillColor: Color.fromARGB(255, 193, 190, 190),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-          ],
+                );
+              }
+              return Container();
+            },
+          ),
           Expanded(
             child: FutureBuilder<List<DoctorModel>>(
               future: _doctorListFuture,
@@ -68,25 +91,40 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (snapshot.hasData) {
+                  List<DoctorModel> doctors = snapshot.data!;
+                  final doctorListProvider = Provider.of<DoctorListProvider>(context);
+                  doctorListProvider.setDoctors(doctors);
+                  if (doctorListProvider.isSearching && _searchController.text.isNotEmpty) {
+                    doctors = doctorListProvider.filteredDoctors;
+                  }
+                  if (doctors.isEmpty) {
+                    return Center(child: Text('No doctors found'));
+                  }
                   return ListView.builder(
-                    itemCount: snapshot.data!.length,
+                    itemCount: doctors.length,
                     itemBuilder: (context, index) {
-                      DoctorModel doctor = snapshot.data![index];
+                      DoctorModel doctor = doctors[index];
+                      final ImageProvider<Object> doctorImage = doctor.image != null
+                          ? NetworkImage(doctor.image!)
+                          : AssetImage("assets/user.png") as ImageProvider<Object>;
+                      final doctorName = doctor.fullName ?? 'N/A';
+                      final doctorCategory = doctor.category ?? 'N/A';
+                      final doctorStartTime = doctor.startTime ?? 'N/A';
+                      final doctorEndTime = doctor.endTime ?? 'N/A';
+
                       return Padding(
                         padding: const EdgeInsets.all(10),
                         child: GestureDetector(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) =>
-                                  DoctorProfile(doctor: doctor),
+                              builder: (context) => DoctorProfile(doctor: doctor),
                             ));
                           },
                           child: Container(
                             height: 100,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              border:
-                                  Border.all(color: Colors.black, width: 0.5),
+                              border: Border.all(color: Colors.black, width: 0.5),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Stack(
@@ -96,17 +134,14 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                                   left: 10,
                                   child: CircleAvatar(
                                     radius: 40,
-                                    backgroundImage: doctor.image != null
-                                        ? AssetImage(doctor.image!)
-                                        : AssetImage(
-                                            "assets/default_avatar.png"),
+                                    backgroundImage: doctorImage,
                                   ),
                                 ),
                                 Positioned(
                                   top: 15,
                                   left: 110,
                                   child: Text(
-                                    doctor.fullName!,
+                                    doctorName,
                                     style: GoogleFonts.montserrat(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -119,7 +154,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                                   top: 40,
                                   left: 110,
                                   child: Text(
-                                    doctor.category!,
+                                    doctorCategory,
                                     style: GoogleFonts.montserrat(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black,
@@ -130,12 +165,12 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                                   bottom: 5,
                                   right: 10,
                                   child: Text(
-                                    "${doctor.startTime!} to ${doctor.endTime!}",
+                                    "$doctorStartTime to $doctorEndTime",
                                     style: GoogleFonts.montserrat(
                                       color: Colors.black,
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),

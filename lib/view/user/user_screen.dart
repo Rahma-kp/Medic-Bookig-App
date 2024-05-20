@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:medic/view/user/user_setting_screens/setting_screen.dart';
-import 'package:medic/widget/profile_details_container.dart';
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+import 'package:medic/view/settings/setting_screen.dart';
+import 'package:medic/view/settings/widget/user_detailsbox.dart';
+class UserScreen extends StatefulWidget {
+  const UserScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<UserScreen> createState() => _UserScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _UserScreenState extends State<UserScreen> {
   String selectedItem = "Settings"; 
 
   @override

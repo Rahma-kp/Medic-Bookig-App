@@ -13,6 +13,7 @@ class DoctorModel {
   String? patients;
   String? experience;
   int? rating;
+  int? fee;
 
   DoctorModel(
       {this.id,
@@ -25,6 +26,7 @@ class DoctorModel {
       required this.workingDays,
       required this.startTime,
       required this.endTime,
+      required this. fee,
       this.aboutDoctor,
       this.patients,
       this.experience,
@@ -45,7 +47,9 @@ class DoctorModel {
         aboutDoctor: json['aboutDoctor'],
         patients: json['patients'],
         experience: json['experience'],
+        fee:json['fee'],
         rating: json['rating']);
+        
   }
 
   Map<String, dynamic> toJson() {
@@ -61,7 +65,8 @@ class DoctorModel {
       'aboutDoctor': aboutDoctor,
       'patients': patients,
       'experience': experience,
-      'rating': rating
+      'rating': rating,
+      'fee':fee
     };
   }
 }

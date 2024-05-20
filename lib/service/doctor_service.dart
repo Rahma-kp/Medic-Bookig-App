@@ -13,6 +13,7 @@ class DoctorService {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   Reference storage = FirebaseStorage.instance.ref();
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
   DoctorService() {
     doctor = firebaseFirestore.collection(doctors).withConverter<DoctorModel>(
         fromFirestore: (snapshot, options) {
@@ -41,6 +42,16 @@ class DoctorService {
   Future<List<DoctorModel>> getAllDoctors() async {
     final snapshot = await doctor.get();
     return snapshot.docs.map((doc) => doc.data()).toList();
+  }
+
+  Future<List<DoctorModel>> getDoctorsByCategory(String category) async {
+    try {
+      final snapshot = await doctor.where('category', isEqualTo: category).get();
+      return snapshot.docs.map((doc) => doc.data()).toList();
+    } catch (error) {
+      log('error during fetching doctors by category: $error');
+      return [];
+    }
   }
 
   Future<String> uploadImage(imageName, imageFile) async {

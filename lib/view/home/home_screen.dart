@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:medic/controller/carousel_controller.dart';
-import 'package:medic/view/user/home_screens/catogory_screen.dart';
-import 'package:medic/view/user/doctor_listing_screen.dart';
-import 'package:medic/view/user/home_screens/notification_screen.dart';
-import 'package:medic/view/user/home_screens/widget/carousel_widget.dart';
-import 'package:medic/view/user/home_screens/widget/tope_doctors_listview.dart';
-import 'package:medic/widget/imgae.dart';
+import 'package:medic/view/home/category_screen.dart';
+import 'package:medic/view/home/notification_screen.dart';
+import 'package:medic/view/home/widget/carousel_widget.dart';
+import 'package:medic/view/home/widget/category_widget.dart';
+import 'package:medic/view/home/widget/tope_doctors_listview.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -70,48 +69,10 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(
                   height: size.height * 0.01,
                 ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 5, top: 5),
-                  height: size.height * 0.15,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.all(size.width * 0.02),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => DoctorListScreen(),
-                            ));
-                          },
-                          child: Column(
-                            children: [
-                              Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.black,width: 1),
-                                  ),
-                                  height: 70,
-                                  width: 70,
-                                  child: Image.asset(
-                                    categoryImgaes[index],
-                                    filterQuality: FilterQuality.high,
-                                    fit: BoxFit.fill,
-                                  )),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(categoryName[index],  style: GoogleFonts.montserrat(
-                                           fontWeight: FontWeight.w600,
-                                          color: Colors.black,
-                                        ),)
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+
+                // category list view calling
+
+                catgoryWidget(size: size),
                 Padding(
                   padding: EdgeInsets.all(size.width * 0.02),
                   child: Text(

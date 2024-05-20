@@ -1,8 +1,7 @@
 import 'package:enefty_icons/enefty_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:medic/controller/bottom_bar-provider.dart';
-import 'package:medic/view/user/authenications/login_screen.dart';
-import 'package:medic/view/user/doctor_profile_screen.dart';
+import 'package:medic/view/authentication/login_screen.dart';
 import 'package:medic/widget/text_widget.dart';
 import 'package:provider/provider.dart';
 
