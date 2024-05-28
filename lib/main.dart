@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:medic/controller/authentication_provider.dart';
 import 'package:medic/controller/bottom_bar-provider.dart';
 import 'package:medic/controller/carousel_controller.dart';
+import 'package:medic/controller/chat_provider.dart';
 import 'package:medic/controller/doctor_list_provider.dart';
 import 'package:medic/controller/doctor_profile_provider.dart';
+import 'package:medic/controller/doctor_provider.dart';
 import 'package:medic/controller/user_provider.dart';
 import 'package:medic/firebase_options.dart';
 import 'package:medic/splash_screen.dart';
@@ -30,7 +32,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) =>AuthenticationProvider() ,),
           ChangeNotifierProvider(create: (context) =>DoctorProfileProvider() ,),
           ChangeNotifierProvider(create: (context) => UserProvider(),),
-          ChangeNotifierProvider(create: (context) => DoctorListProvider(),)
+          ChangeNotifierProvider(create: (context) => DoctorListProvider(),),
+          ChangeNotifierProvider(create: (context) => DoctorController(),),
+          ChangeNotifierProvider(create: (context) => ChatController(),)
         ],
         child: MaterialApp(
           theme: ThemeData(

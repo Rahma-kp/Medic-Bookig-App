@@ -6,9 +6,9 @@ class PopupWidgets {
   void showSuccessSnackbar(BuildContext context, String message) {
     final snackbar = SnackBar(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      content: Text(message),
+      content: Text(message,style: TextStyle(color: Colors.white),),
       duration: const Duration(seconds: 3),
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: Color.fromARGB(255, 30, 138, 97),
       behavior: SnackBarBehavior.floating,
     );
     ScaffoldMessenger.of(context).showSnackBar(snackbar);
@@ -29,7 +29,7 @@ class PopupWidgets {
     showDialog(
       context: context,
       builder: (context) => Container(
-        color: Colors.white,
+        color: const Color.fromARGB(255, 48, 47, 47),
         child: const Center(
           child: CircularProgressIndicator(),
         ),
@@ -66,43 +66,4 @@ class PopupWidgets {
     await Future.delayed(const Duration(seconds: 1));
     Navigator.pop(context);
   }
-
-//   Future<void> showWarningDialog(BuildContext context,
-//       {required String label,
-//       required VoidCallback onPressed,
-//       required String text,
-//       String? title}) {
-//     final Size size = MediaQuery.of(context).size;
-//     return showDialog(
-//       context: context,
-//       builder: (context) => AlertDialog(
-//         content: TextWidgets().BodyText(context, text: text),
-//         surfaceTintColor: Colors.white,
-//         title: Center(
-//           child: TextWidgets().titleText2(
-//             context,
-//             text: title ?? 'Warning',
-//             color: Colors.red,
-//           ),
-//         ),
-//         actions: [
-//           ButtonWidgets().textButtonWidget(
-//             size,
-//             context,
-//             label: 'Cancel',
-//             onPressed: () {
-//               Navigator.pop(context);
-//             },
-//           ),
-//           ButtonWidgets().textButtonWidget(
-//             size,
-//             context,
-//             color: Colors.red,
-//             label: label,
-//             onPressed: onPressed,
-//           ),
-//         ],
-//       ),
-//     );
-//   }
  }

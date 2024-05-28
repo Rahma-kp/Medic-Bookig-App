@@ -11,19 +11,22 @@ final List<String> categoryImgaes = [
   "assets/dem.png",
   "assets/dem.png",
   "assets/dem.png",
+  "assets/dem.png",
+  "assets/dem.png",
 ];
 
 
 final List<String>categoryName=[
-  "Emergency ",
-  "Gynaecologist",
+  "Emergency",
+  "Gynecologist",
   "Neurologist",
   'Orthopedist',
-  "Dematologist",
+  "Dermatologist",
   "Dental",
   'Surgeon',
   'Oncologist',
   'Endocrinologist',
   'Allergist',
-
+  'Cardiologist',
+  'Psychiatrist'
 ];

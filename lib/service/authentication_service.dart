@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:medic/model/usemodel.dart';
+import 'package:medic/model/user_model.dart';
 import 'package:medic/widget/bottom_bar.dart';
 import 'package:medic/widget/navigation.dart';
 import 'package:medic/widget/popup_widget.dart';
@@ -32,17 +32,17 @@ class AuthService {
     );
   }
 
-  Future<void> addUser(UserModel data) async {
-    try {
-      if (firebaseAuth.currentUser != null) {
-        await user.doc(firebaseAuth.currentUser!.uid).set(data);
-      } else {
-        throw Exception('No current user found');
-      }
-    } catch (e) {
-      log('Error adding post :$e');
-    }
-  }
+  // Future<void> addUser(UserModel data) async {
+  //   try {
+  //     if (firebaseAuth.currentUser != null) {
+  //       await user.doc(firebaseAuth.currentUser!.uid).set(data);
+  //     } else {
+  //       throw Exception('No current user found');
+  //     }
+  //   } catch (e) {
+  //     log('Error adding post :$e');
+  //   }
+  // }
 
   Future<UserModel?> getCurrentUser() async {
     try {

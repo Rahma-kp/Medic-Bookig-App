@@ -1,32 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:medic/model/doctor_model.dart';
 import 'package:medic/service/doctor_service.dart';
 
-class DoctorListProvider with ChangeNotifier {
-  bool _isSearching = false;
-  List<DoctorModel> _allDoctors = [];
+class DoctorListProvider extends ChangeNotifier {
+  final DoctorService doctorService = DoctorService();
+  late  Future<List<DoctorModel>> doctorListFuture;
+ TextEditingController searchController= TextEditingController();
+  List<DoctorModel> doctors = [];
   List<DoctorModel> _filteredDoctors = [];
+  bool isSearching = false;
 
-  bool get isSearching => _isSearching;
   List<DoctorModel> get filteredDoctors => _filteredDoctors;
+  
+ 
 
   void toggleSearch() {
-    _isSearching = !_isSearching;
+    isSearching = !isSearching;
     notifyListeners();
   }
-
-  void setDoctors(List<DoctorModel> doctors) {
-    _allDoctors = doctors;
-    _filteredDoctors = doctors;
-  }
+  
 
   void searchDoctors(String query) {
     if (query.isEmpty) {
-      _filteredDoctors = _allDoctors;
+      _filteredDoctors = doctors;
     } else {
-      _filteredDoctors = _allDoctors
-          .where((doctor) => doctor.fullName!.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+      _filteredDoctors = doctors.where((doctor) {
+        final doctorName = doctor.fullName?.toLowerCase() ?? '';
+        return doctorName.contains(query.toLowerCase());
+      }).toList();
     }
     notifyListeners();
   }

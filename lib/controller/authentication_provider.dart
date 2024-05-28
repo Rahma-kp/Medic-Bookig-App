@@ -3,7 +3,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:medic/model/usemodel.dart';
+import 'package:medic/model/user_model.dart';
 import 'package:medic/service/authentication_service.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
@@ -67,7 +67,7 @@ class AuthenticationProvider extends ChangeNotifier {
   }
 
   Future<void> togglePasswordVisibility() async {
-    showPassword = !showPassword;
+    showPassword =!showPassword;
     notifyListeners();
   }
 

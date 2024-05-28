@@ -12,7 +12,7 @@ class DoctorModel {
   String? endTime;
   String? patients;
   String? experience;
-  int? rating;
+  String? rating;
   int? fee;
 
   DoctorModel(
@@ -31,6 +31,10 @@ class DoctorModel {
       this.patients,
       this.experience,
       this.rating});
+      
+       double get ratingAsDouble {
+    return double.tryParse(rating!) ?? 0.0;
+  }
 
   factory DoctorModel.fromJson(String id, Map<String, dynamic> json) {
     return DoctorModel(
@@ -47,7 +51,7 @@ class DoctorModel {
         aboutDoctor: json['aboutDoctor'],
         patients: json['patients'],
         experience: json['experience'],
-        fee:json['fee'],
+         fee: json['fee'] is int ? json['fee'] : int.tryParse(json['fee'] ?? '0'),
         rating: json['rating']);
         
   }

@@ -43,16 +43,15 @@ class DoctorService {
     final snapshot = await doctor.get();
     return snapshot.docs.map((doc) => doc.data()).toList();
   }
-
-  Future<List<DoctorModel>> getDoctorsByCategory(String category) async {
-    try {
-      final snapshot = await doctor.where('category', isEqualTo: category).get();
-      return snapshot.docs.map((doc) => doc.data()).toList();
-    } catch (error) {
-      log('error during fetching doctors by category: $error');
-      return [];
-    }
+Future<List<DoctorModel>> getDoctorsByCategory(String category) async {
+  try {
+    final snapshot = await doctor.where('category', isEqualTo: category).get();
+    return snapshot.docs.map((doc) => doc.data()).toList();
+  } catch (error) {
+    log('error during fetching doctors by category: $error'); 
+    return [];
   }
+}
 
   Future<String> uploadImage(imageName, imageFile) async {
     Reference imageFolder = storage.child('productImage');

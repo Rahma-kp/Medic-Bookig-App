@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:medic/controller/bottom_bar-provider.dart';
-import 'package:medic/view/appoinment/appoinment_tabs.dart';
-import 'package:medic/view/chat/chat_list_screen.dart';
-import 'package:medic/view/home/home_screen.dart';
-import 'package:medic/view/user/user_screen.dart';
+import 'package:medic/view/userside/appoinment/appoinment_tabs.dart';
+import 'package:medic/view/userside/chat/chatlist_screen.dart';
+import 'package:medic/view/userside/home/home_screen.dart';
+import 'package:medic/view/userside/user/user_screen.dart';
 import 'package:provider/provider.dart';
 
 class BottomNavigation extends StatelessWidget {
   final List<Widget> _pages = [
     HomeScreen(),
     AppointmentScreen(),
-    ChatListingScreen(),
+    ChatListScreen(),
     UserScreen(),
   ];
 
@@ -22,7 +22,7 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bottomProvider = Provider.of<BottomBarProvider>(context);
-    bottomProvider.initIndex; // Initialize currentIndex
+    bottomProvider.initIndex; 
     return Scaffold(
       backgroundColor: Colors.white,
       body: _pages[bottomProvider.currentIndex],
