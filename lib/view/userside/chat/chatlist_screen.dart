@@ -1,57 +1,74 @@
-
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/controller/chat_provider.dart';
 import 'package:medic/view/userside/chat/widget/chat_tile.dart';
 import 'package:medic/widget/custom_text.dart';
-
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 
 class ChatListScreen extends StatelessWidget {
-  const ChatListScreen({
-    Key? key,
-  });
+  const ChatListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<ChatController>(context, listen: false).getAllChats();
     return Scaffold(
       appBar: AppBar(
-        title: CustomText(
-          text: 'Inbox',
-          size: 20,
+        backgroundColor: Color.fromARGB(255, 241, 240, 240),
+        title: Text(
+          "Chats",
+          style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
         ),
-        actions: [
-         
-        ],
+        centerTitle: true,
       ),
+      backgroundColor: Color.fromARGB(255, 241, 240, 240),
       body: Padding(
-        padding: const EdgeInsets.only(right: 20, left: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color.fromARGB(255, 210, 207, 207),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  prefixIcon: Icon(Icons.search),
+                  hintText: "Search for Doctors",
+                ),
+              ),
+            ),
             SizedBox(
-              height:20
+              height: 20,
             ),
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(
-                      8),
-                ),
-                child:
-                    Consumer<ChatController>(builder: (context, value, child) {
+              child: Consumer<ChatController>(
+                builder: (context, chatController, child) {
+                  if (chatController.isLoading) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+
+                  if (chatController.myAllChat == null ||
+                      chatController.myAllChat!.isEmpty) {
+                    return const Center(
+                      child: CustomText(
+                        text: 'No chats available',
+                        size: 16,
+                        color: Colors.grey,
+                      ),
+                    );
+                  }
+
                   return ListView.separated(
                     itemBuilder: (context, index) {
                       return ChatTileWidget(
-                        chatModel: value.myAllChat[index],
-                        // userModel: value.myAllChat[index].userInfo!,
+                        chatModel: chatController.myAllChat![index],
                       );
                     },
-                    separatorBuilder: (context, index) => Divider(),
-                    itemCount: value.myAllChat.length,
+                    separatorBuilder: (context, index) => const Divider(),
+                    itemCount: chatController.myAllChat!.length,
                   );
-                }),
+                },
               ),
             ),
           ],

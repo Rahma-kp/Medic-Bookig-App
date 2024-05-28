@@ -47,10 +47,11 @@ class ChatBottomBar extends StatelessWidget {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(
                             MediaQueryWidget().width(context, 0.1))),
-                    suffixIcon: IconButton(icon: Icon(Icons.send),
+                    suffixIcon: IconButton(icon: Icon(Icons.send,color: Color.fromARGB(255, 29, 141, 102),),
                         onPressed: () async {
                       if (chatController.messageController.text.isNotEmpty) {
                         await chatController.sendMessage(userInfo.uId!);
+                        chatController.messageController.clear();
                         final getUserPrd =
                             Provider.of<User>(context, listen: false);
                         // await Provider.of<NotificationController>(context,
@@ -61,7 +62,7 @@ class ChatBottomBar extends StatelessWidget {
                         //         receiverId: userInfo.uId!,
                         //         title: getUserPrd.currentUser!.userName);
 
-                        chatController.messageController.clear();
+                       
                         print('Message send');
                       }
                     },

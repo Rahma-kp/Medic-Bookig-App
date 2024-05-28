@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/controller/authentication_provider.dart';
+import 'package:medic/view/doctorside/wiget/bottom_bar.dart';
 import 'package:medic/view/userside/authentication/login_screen.dart';
 import 'package:medic/widget/bottom_bar.dart';
 import 'package:medic/widget/navigation.dart';
@@ -68,7 +69,8 @@ goToLogin(context) async {
       await Future.delayed(
         Duration(seconds: 2),
       );
-      return NavigatorWidget().pushReplacement(context,BottomNavigation(selectedIndex: 0),);   
+      // return NavigatorWidget().pushReplacement(context,BottomNavigation(selectedIndex: 0),);   
+      return NavigatorWidget().pushReplacement(context, BottomDoctorNavigation(selectedIndex: 0),);
       
     }
   }

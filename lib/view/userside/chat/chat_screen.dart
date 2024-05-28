@@ -30,12 +30,11 @@ class _ChatPageState extends State<ChatPage> {
     getChatPrd.getMessages(widget.userInfo.uId!);
 
     return Scaffold(
-      appBar: AppBar(
-       
+      appBar: AppBar(backgroundColor: Color.fromARGB(255, 29, 141, 102),
           foregroundColor: Colors.white,
           title: Text(widget.userInfo.userName!),
           actions: [
-           
+           IconButton(onPressed: (){}, icon: Icon(Icons.call))
           ]),
       body: Column(
         children: [

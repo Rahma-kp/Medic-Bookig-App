@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +15,7 @@ class ChatController extends ChangeNotifier {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   TextEditingController messageController = TextEditingController();
   ChatService chatService = ChatService();
-  List<ChatModel> myAllChat = [];
+  List<ChatModel>? myAllChat = [];
   bool isLoading=false;
   
 
@@ -70,34 +69,40 @@ class ChatController extends ChangeNotifier {
   // }
 
   getAllChats() async {
-    List<UserModel> allUser = await FireStoreService().getAllUser();
-    List<ChatModel> allChats = [];
-    myAllChat.clear();
-    try {
-      allChats = await chatService.getAllChats();
-      for (var chat in allChats) {
-        if (chat.uId1 == firebaseAuth.currentUser!.uid ||
-            chat.uId2 == firebaseAuth.currentUser!.uid) {
-          UserModel? user = await allUser.firstWhere(
-              (user) =>
-                  user.uId == chat.uId2 ||
-                  user.uId == chat.uId1 &&
-                      user.uId != firebaseAuth.currentUser!.uid,
-              orElse: () => UserModel());
-          await getMessages(user.uId!);
-          final chatInfo = ChatModel(
-              timeStamp: chat.timeStamp,
-              lastMessage: chat.lastMessage ?? '',
-              userInfo: user);
+  isLoading = true;
+  notifyListeners();
 
-          myAllChat.add(chatInfo);
-          notifyListeners();
+  try {
+    List<UserModel> allUser = await FireStoreService().getAllUser();
+    List<ChatModel> allChats = await chatService.getAllChats();
+    List<ChatModel> filteredChats = [];
+
+    for (var chat in allChats) {
+      if (chat.uId1 == firebaseAuth.currentUser!.uid || chat.uId2 == firebaseAuth.currentUser!.uid) {
+        UserModel? user = allUser.firstWhere(
+          (user) => (user.uId == chat.uId1 || user.uId == chat.uId2) && user.uId != firebaseAuth.currentUser!.uid,
+          orElse: () => UserModel()
+        );
+
+        if (user.uId != null) {
+          final chatInfo = ChatModel(
+            timeStamp: chat.timeStamp,
+            lastMessage: chat.lastMessage ?? '',
+            userInfo: user,
+          );
+          filteredChats.add(chatInfo);
         }
       }
-    } catch (e) {
-      log("Error from Get all chats : ${e.toString()}");
     }
+    
+    myAllChat = filteredChats;
+  } catch (e) {
+    log("Error from Get all chats: ${e.toString()}");
+  } finally {
+    isLoading = false;
+    notifyListeners();
   }
+}
 
   createChat(String receiverId) async {
     String chatRoomId = await generateChatRoomId(

@@ -51,7 +51,7 @@ Widget interSubText({text, color, fontWeight}) {
       bool bold = false,
       // int maxLine = 2,
       int trimLength = 240,
-      double size = 13}) {
+      double size = 15}) {
     return ReadMoreText(
       text,
       textAlign: textAlign ?? TextAlign.justify,

@@ -34,8 +34,8 @@ class ChatBubble extends StatelessWidget {
           padding: EdgeInsets.all(MediaQueryWidget().width(context, .03)),
           decoration: BoxDecoration(
             color: isSent
-                ? Color.fromARGB(255, 188, 223, 238)
-                : Color.fromARGB(255, 76, 147, 94),
+                ? Color.fromARGB(255, 29, 141, 102)
+                : Color.fromARGB(255, 110, 111, 110),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(MediaQueryWidget().width(context, .045)),
               topRight:
@@ -57,14 +57,14 @@ class ChatBubble extends StatelessWidget {
                   bold: false,
                   trimLength: 300,
                   textAlign: TextAlign.justify,
-                  color: isSent ? Colors.black : Colors.white),
+                  color: isSent ?Colors.white :Colors.black ),
               SizedBox(height: MediaQueryWidget().width(context, .02)),
               CustomText( 
                   text: time,
                   bold: false,
-                  size: 13,
+                  size: 10,
                   textAlign: TextAlign.right,
-                  color: isSent ? Colors.black : Colors.white),
+                  color: isSent ? Colors.white :Colors.black ),
             ],
           ),
         ),
