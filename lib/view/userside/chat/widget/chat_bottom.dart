@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/controller/chat_provider.dart';
 import 'package:medic/controller/notification_contoller.dart';
+import 'package:medic/model/doctor_model.dart';
 import 'package:medic/model/user_model.dart';
 import 'package:medic/view/userside/home/widget/media_query.dart';
 import 'package:provider/provider.dart';
 
 class ChatBottomBar extends StatelessWidget {
   final ChatController chatController;
-  final UserModel userInfo;
+  final DoctorModel userInfo;
   const ChatBottomBar({
     super.key,
     required this.chatController,
@@ -50,7 +51,7 @@ class ChatBottomBar extends StatelessWidget {
                     suffixIcon: IconButton(icon: Icon(Icons.send,color: Color.fromARGB(255, 29, 141, 102),),
                         onPressed: () async {
                       if (chatController.messageController.text.isNotEmpty) {
-                        await chatController.sendMessage(userInfo.uId!);
+                        await chatController.sendMessage(userInfo.id!);
                         chatController.messageController.clear();
                         final getUserPrd =
                             Provider.of<User>(context, listen: false);

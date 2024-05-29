@@ -17,7 +17,7 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final getProvider = Provider.of<AuthenticationProvider>(context);
+    final getProvider = Provider.of<AuthController>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 241, 240, 240),
@@ -44,7 +44,7 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
                     "Number",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                   ),
-                  Consumer<AuthenticationProvider>(builder: (context, value, child) => 
+                  Consumer<AuthController>(builder: (context, value, child) => 
                      TextFormField(
                       controller: getProvider.phoneController,
                       keyboardType: TextInputType.phone,
@@ -127,12 +127,12 @@ class _PhoneAuthenticationState extends State<PhoneAuthentication> {
                     height: 20,
                   ),
                   if (getProvider.showOtpField) ...[
-                    Text(
+                    const Text(
                       "Verification OTP",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
-                    Consumer<AuthenticationProvider>(
+                    Consumer<AuthController>(
                         builder: (context, value, child) {
                       if (value.showOtpField == true) {
                         return Column(

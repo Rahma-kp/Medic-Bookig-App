@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:medic/controller/bottom_bar-provider.dart';
 import 'package:medic/view/doctorside/appoinment_screen.dart';
-import 'package:medic/view/doctorside/doctor_profile.dart';
+import 'package:medic/view/doctorside/profile.dart';
 import 'package:medic/view/doctorside/review_screen.dart';
 import 'package:medic/view/userside/chat/chatlist_screen.dart';
 import 'package:provider/provider.dart';
@@ -12,12 +12,8 @@ class BottomDoctorNavigation extends StatelessWidget {
     AppointmentDoctors(),
     DoctorReviewScreen(),
     ChatListScreen(),
-    DoctorProfileScreen(
-        doctorName: 'sdfghjkl;',
-        specialty: 'hbsfhbsjkfbjihf',
-        contactInfo: 'fsgdd',
-        bio: 'hfdzhsh',
-        imageUrl: 'dhszhzdh')
+    DoctorProfileScreen()
+  
   ];
 
   final int selectedIndex;

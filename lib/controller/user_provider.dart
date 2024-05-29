@@ -8,7 +8,7 @@ import 'package:medic/service/firestore_service.dart';
 import 'package:medic/view/userside/authentication/login_screen.dart';
 
 
-class UserProvider extends ChangeNotifier {
+class UserController extends ChangeNotifier {
   TextEditingController searchController = TextEditingController();
   TextEditingController userBookingDateController = TextEditingController();
   TextEditingController userBookingResheduledController =
@@ -115,9 +115,7 @@ class UserProvider extends ChangeNotifier {
         email:  currentUser!.email,
         profilePath: profilePath,
         phone: phoneController.text.trim(),
-        //  userName: textToCamelCase(text: nameController.text.trim()),
-      
-        // profilePic: profileUrl ?? currentUser!.profilePic
+      userName:nameController.text.trim() 
         );
     await _userService.updateUserDetails(data);
 

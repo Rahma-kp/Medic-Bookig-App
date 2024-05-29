@@ -65,4 +65,26 @@ Widget interSubText({text, color, fontWeight}) {
     );
   }
 
+class TextsWidget {
+  Widget costumParagraphText(BuildContext context,
+      {required String text,
+      TextAlign? textAlign,
+      Color? color,
+      bool bold = false,
+      // int maxLine = 2,
+      int trimLength = 240,
+      double size = 13}) {
+    return ReadMoreText(
+      text,
+      textAlign: textAlign ?? TextAlign.justify,
+      // trimLines: maxLine,
+      trimLength: trimLength,
+      style: GoogleFonts.montserrat(
+        color: color ?? Colors.black,
+        fontSize: size,
+        fontWeight: bold ? FontWeight.bold : FontWeight.w500,
+      ),
+    );
+  }
+}
   

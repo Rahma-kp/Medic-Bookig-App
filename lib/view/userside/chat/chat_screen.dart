@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medic/controller/chat_provider.dart';
+import 'package:medic/model/doctor_model.dart';
 import 'package:medic/model/user_model.dart';
 import 'package:medic/view/userside/chat/widget/chat_bottom.dart';
 import 'package:medic/view/userside/chat/widget/chat_bubble.dart';
@@ -9,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 class ChatPage extends StatefulWidget {
-  final UserModel userInfo;
+  final DoctorModel userInfo;
   const ChatPage({Key? key, required this.userInfo}) : super(key: key);
 
   @override
@@ -27,12 +28,12 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     final getChatPrd = Provider.of<ChatController>(context, listen: false);
-    getChatPrd.getMessages(widget.userInfo.uId!);
+    getChatPrd.getMessages(widget.userInfo.id!);
 
     return Scaffold(
       appBar: AppBar(backgroundColor: Color.fromARGB(255, 29, 141, 102),
           foregroundColor: Colors.white,
-          title: Text(widget.userInfo.userName!),
+          title: Text("Dr.${widget.userInfo.fullName!}"),
           actions: [
            IconButton(onPressed: (){}, icon: Icon(Icons.call))
           ]),

@@ -43,7 +43,7 @@ class _DoctorProfileState extends State<DoctorProfile> {
           style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
         ),
         actions: [IconButton(onPressed: (){
-          NavigatorWidget().push(context, ChatPage(userInfo:UserModel(uId: widget.doctor.id,userName: widget.doctor.fullName),));
+          NavigatorWidget().push(context, ChatPage(userInfo:DoctorModel(id: widget.doctor.id,fullName: widget.doctor.fullName),));
         }, icon: Icon(FeatherIcons.messageCircle,))],
       ),
       backgroundColor: Color.fromARGB(255, 241, 240, 240),

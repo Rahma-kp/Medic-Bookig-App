@@ -29,9 +29,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (context) => BottomBarProvider(),
           ),
-          ChangeNotifierProvider(create: (context) =>AuthenticationProvider() ,),
+          ChangeNotifierProvider(create: (context) =>AuthController() ,),
           ChangeNotifierProvider(create: (context) =>DoctorProfileProvider() ,),
-          ChangeNotifierProvider(create: (context) => UserProvider(),),
+          ChangeNotifierProvider(create: (context) => UserController(),),
           ChangeNotifierProvider(create: (context) => DoctorListProvider(),),
           ChangeNotifierProvider(create: (context) => DoctorController(),),
           ChangeNotifierProvider(create: (context) => ChatController(),)

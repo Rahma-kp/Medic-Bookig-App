@@ -23,11 +23,11 @@ class ChatTileWidget extends StatelessWidget {
             ));
       },
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(chatModel.userInfo!.profilePic!),
+        backgroundImage: NetworkImage(chatModel.userInfo!.image!),
         radius: MediaQueryWidget().width(context, .06),
       ),
       title: CustomText(
-          text: chatModel.userInfo?.userName! ?? '',
+          text: chatModel.userInfo?.fullName! ?? '',
           size: 15,
           textAlign: TextAlign.start),
       subtitle: CustomText(

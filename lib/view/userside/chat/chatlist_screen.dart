@@ -10,6 +10,12 @@ class ChatListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final chatController = Provider.of<ChatController>(context, listen: false);
+    // Fetch chats when the screen loads
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      chatController.getAllChats();
+    });
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 241, 240, 240),

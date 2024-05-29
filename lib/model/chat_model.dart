@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:medic/model/doctor_model.dart';
 import 'package:medic/model/user_model.dart';
 
 class ChatModel {
@@ -6,7 +7,7 @@ class ChatModel {
   String? chatRoomId;
   String? uId2;
   String? lastMessage;
-  UserModel? userInfo;
+  DoctorModel ? userInfo;
   DateTime? timeStamp;
 
   ChatModel({

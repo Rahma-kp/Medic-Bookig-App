@@ -18,7 +18,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _signUpFormKey = GlobalKey<FormState>();
     final getProvider =
-        Provider.of<AuthenticationProvider>(context, listen: false);
+        Provider.of<AuthController>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 241, 240, 240),
@@ -135,9 +135,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     onTap: () async {
                       if (_signUpFormKey.currentState!.validate()) {
                         try {
-                          getProvider.signUpWithEmail(
-                              getProvider.emailController.text,
-                              getProvider.passwordController.text);
+                          getProvider.signUpWithEmail(getProvider.emailController.text,
+                                getProvider.passwordController.text);
                           Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
                               builder: (context) =>
@@ -202,13 +201,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: 20),
                 Center(
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => PhoneAuthentication(),
-                        ),
-                      );
-                    },
+                    // onTap: () {
+                    //   Navigator.of(context).push(
+                    //     MaterialPageRoute(
+                    //       builder: (context) => PhoneAuthentication(),
+                    //     ),
+                    //   );
+                    // },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

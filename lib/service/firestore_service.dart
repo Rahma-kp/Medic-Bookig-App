@@ -6,10 +6,11 @@ import 'package:medic/model/user_model.dart';
 
 class FireStoreService {
   String userCollection = "user";
-  String courseCollection = 'doctor';
+  String doctorCollection = 'doctor';
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Reference storage = FirebaseStorage.instance.ref();
+ 
 
   updateUserDetails(UserModel data) async {
     try {
@@ -275,6 +276,8 @@ class FireStoreService {
   //   }
   // }
 
+
+
   unFollowMentor(String mentorId) {
     try {
       firestore.collection(userCollection).doc(mentorId).update({
@@ -292,4 +295,19 @@ class FireStoreService {
       throw "Error from checkFollowers service:  $e";
     }
   }
+  Future<List<Map<String, dynamic>>> getDoctorList() async {
+    try {
+      QuerySnapshot querySnapshot = await firestore.collection('doctors').get();
+      return querySnapshot.docs.map((doc) {
+        return {
+          'email': doc['email'],
+          'password': doc['password'],
+        };
+      }).toList();
+    } catch (e) {
+      throw Exception('Failed to fetch doctor list');
+    }
+  }
 }
+
+

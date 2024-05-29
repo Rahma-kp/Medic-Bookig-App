@@ -3,17 +3,23 @@ import 'package:country_picker/country_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:medic/consents/doctors_list.dart';
 import 'package:medic/model/user_model.dart';
 import 'package:medic/service/authentication_service.dart';
+import 'package:medic/service/firestore_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+const shrdKey='stored';
+class AuthController extends ChangeNotifier {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController otpController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
-class AuthenticationProvider extends ChangeNotifier {
-  final AuthService authService = AuthService();
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController otpController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+ final AuthService authService = AuthService();
+  final FireStoreService fireStoreService = FireStoreService();
+  bool isDoctor = false;
   int currentIndex = 0;
   UserModel? currentUser;
   bool showPassword = true;
@@ -29,7 +35,7 @@ class AuthenticationProvider extends ChangeNotifier {
       displayName: "INDIA",
       displayNameNoCountryCode: "IN",
       e164Key: "");
-
+ 
   Future<UserCredential> signUpWithEmail(String email, String password) async {
     return await authService.signUpWithEmail(email, password);
   }
@@ -105,4 +111,22 @@ class AuthenticationProvider extends ChangeNotifier {
     currentIndex = index;
     notifyListeners();
   }
+
+   Future<bool> checkLogin() async {
+    String email =emailController.text.trim();
+    String psw = passwordController.text.trim();
+
+    for (var doct in doctorList) {
+      if (doct["email"] == email && doct["password"] == psw) {
+      final shrd=await  SharedPreferences.getInstance();
+    await  shrd.setBool(shrdKey, true);
+        return true;
+      }
+    }
+
+    bool isUser = (await signInWithEmail(email, psw)) as bool;
+    return isUser;
+  }
 }
+ 
+

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,6 +9,7 @@ import 'package:medic/view/userside/authentication/login_screen.dart';
 import 'package:medic/widget/bottom_bar.dart';
 import 'package:medic/widget/navigation.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key});
@@ -18,12 +21,11 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-      goToLogin(context);
+    goToLogin(context);
     super.initState();
-  
   }
+
   @override
- 
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 38, 140, 101),
@@ -46,31 +48,42 @@ class _SplashScreenState extends State<SplashScreen> {
           )
         ],
       ),
-    );
-  
-
+   );
   }
-
-  
 }
-goToLogin(context) async {
-    User? currentUser = FirebaseAuth.instance.currentUser;
-    final UserPrvd =
-        Provider.of<AuthenticationProvider>(context, listen: false);
 
-    if (currentUser == null) {
-      await Future.delayed(
-        Duration(seconds: 2),
-      );
-      return NavigatorWidget().pushReplacement(context,LoginScreen(),);
-    } else {
-      CircularProgressIndicator();
-      await UserPrvd.getUser();
-      await Future.delayed(
-        Duration(seconds: 2),
-      );
-      // return NavigatorWidget().pushReplacement(context,BottomNavigation(selectedIndex: 0),);   
-      return NavigatorWidget().pushReplacement(context, BottomDoctorNavigation(selectedIndex: 0),);
-      
-    }
+goToLogin(context) async {
+  User? currentUser = FirebaseAuth.instance.currentUser;
+  final UserPrvd = Provider.of<AuthController>(context, listen: false);
+final shrd=await SharedPreferences.getInstance();
+final a=shrd.getBool(shrdKey);
+log(a.toString());
+  if (currentUser != null) {
+    log('message');
+   CircularProgressIndicator();
+    await UserPrvd.getUser();
+    await Future.delayed(
+      Duration(seconds: 2),
+    );
+    return NavigatorWidget().pushReplacement(
+      context,
+      BottomNavigation(selectedIndex: 0),
+    );
+  }else if(a==true){
+        return NavigatorWidget().pushReplacement(
+      context,
+      BottomDoctorNavigation(selectedIndex: 0),
+    );
+  } 
+  
+  else {
+    
+     await Future.delayed(
+      Duration(seconds: 2),
+    );
+    return NavigatorWidget().pushReplacement(
+      context,
+      LoginScreen(),
+    );
   }
+}
