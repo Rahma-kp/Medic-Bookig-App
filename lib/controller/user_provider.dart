@@ -34,7 +34,6 @@ class UserController extends ChangeNotifier {
   UserModel? currentUser;
   UserModel? sortedUser;
   String? profileUrl;
-  // Reference? profileImage;
   String? profilePath;
   File? pickedImage;
   bool isLoading = false;

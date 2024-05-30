@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-class MediaQueryWidget {
-  double width(BuildContext context, double size) {
-    return MediaQuery.of(context).size.width * size;
-  }
+// class MediaQueryWidget {
+//   double width(BuildContext context, double size) {
+//     return MediaQuery.of(context).size.width * size;
+//   }
 
-  double height(BuildContext context, double size) {
-    return MediaQuery.of(context).size.height * size;
-  }
-}
+//   double height(BuildContext context, double size) {
+//     return MediaQuery.of(context).size.height * size;
+//   }
+// }

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:medic/model/doctor_model.dart';
-import 'package:medic/model/user_model.dart';
 
 class ChatModel {
   String? uId1;

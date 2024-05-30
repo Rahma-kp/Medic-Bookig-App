@@ -71,7 +71,7 @@ class ChatListScreen extends StatelessWidget {
                         chatModel: chatController.myAllChat![index],
                       );
                     },
-                    separatorBuilder: (context, index) => const Divider(),
+                    separatorBuilder: (context, index) => const SizedBox(height: 10,),
                     itemCount: chatController.myAllChat!.length,
                   );
                 },

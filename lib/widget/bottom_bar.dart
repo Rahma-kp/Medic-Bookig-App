@@ -4,7 +4,7 @@ import 'package:medic/controller/bottom_bar-provider.dart';
 import 'package:medic/view/userside/appoinment/appoinment_tabs.dart';
 import 'package:medic/view/userside/chat/chatlist_screen.dart';
 import 'package:medic/view/userside/home/home_screen.dart';
-import 'package:medic/view/userside/user/user_screen.dart';
+import 'package:medic/view/userside/profile/user_profile_screen.dart';
 import 'package:provider/provider.dart';
 
 class BottomNavigation extends StatelessWidget {
