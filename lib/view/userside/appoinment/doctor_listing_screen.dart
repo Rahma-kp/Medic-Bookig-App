@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medic/controller/doctor_list_provider.dart';
+import 'package:medic/controller/doctor_provider.dart';
 import 'package:medic/model/doctor_model.dart';
-import 'package:medic/service/doctor_service.dart';
 import 'package:medic/view/userside/appoinment/doctor_profile_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -16,30 +16,27 @@ class DoctorListScreen extends StatefulWidget {
 }
 
 class _DoctorListScreenState extends State<DoctorListScreen> {
-  final DoctorService _doctorService = DoctorService();
-  late Future<List<DoctorModel>> _doctorListFuture;
-  final TextEditingController _searchController = TextEditingController();
-
   @override
-  void initState() {
-    super.initState();
-    _fetchDoctors();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    fetchDoctors();
   }
 
-  void _fetchDoctors() {
-    setState(() {
-      _doctorListFuture = widget.category != null
-          ? _doctorService.getDoctorsByCategory(widget.category!)
-          : _doctorService.getAllDoctors();
-    });
+  void fetchDoctors() {
+    final serachpro = Provider.of<DoctorListProvider>(context, listen: false);
+
+    serachpro.doctorListFuture = widget.category != null
+        ? serachpro.doctorService.getDoctorsByCategory(widget.category!)
+        : serachpro.doctorService.getAllDoctors();
   }
 
   @override
   Widget build(BuildContext context) {
+    final serachpro = Provider.of<DoctorListProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
-        backgroundColor: Color.fromARGB(255, 122, 182, 159),
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: const Color.fromARGB(255, 122, 182, 159),
         actions: [
           Consumer<DoctorListProvider>(
             builder: (context, doctorListProvider, child) {
@@ -47,13 +44,13 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                 onPressed: () {
                   doctorListProvider.toggleSearch();
                 },
-                icon: Icon(Icons.search),
+                icon: const Icon(Icons.search),
               );
             },
           ),
         ],
       ),
-      backgroundColor: Color.fromARGB(255, 241, 240, 240),
+      backgroundColor: const Color.fromARGB(255, 241, 240, 240),
       body: Column(
         children: [
           Consumer<DoctorListProvider>(
@@ -62,15 +59,15 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: TextFormField(
-                    controller: _searchController,
+                    controller: doctorListProvider.searchController,
                     onChanged: (query) {
-                      doctorListProvider.searchDoctors(query);
+                      // doctorListProvider.searchDoctors(query);
                     },
                     decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: const Icon(Icons.search),
                       hintText: "Search for doctors",
                       filled: true,
-                      fillColor: Color.fromARGB(255, 193, 190, 190),
+                      fillColor: const Color.fromARGB(255, 193, 190, 190),
                       border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(20),
@@ -84,21 +81,21 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
           ),
           Expanded(
             child: FutureBuilder<List<DoctorModel>>(
-              future: _doctorListFuture,
+              future: serachpro.doctorListFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (snapshot.hasData) {
                   List<DoctorModel> doctors = snapshot.data!;
                   final doctorListProvider = Provider.of<DoctorListProvider>(context);
                   // doctorListProvider.setDoctors(doctors);
-                  if (doctorListProvider.isSearching && _searchController.text.isNotEmpty) {
+                  if (doctorListProvider.isSearching && serachpro.searchController.text.isNotEmpty) {
                     doctors = doctorListProvider.filteredDoctors;
                   }
                   if (doctors.isEmpty) {
-                    return Center(child: Text('No doctors found'));
+                    return const Center(child: Text('No doctors found'));
                   }
                   return ListView.builder(
                     itemCount: doctors.length,
@@ -106,7 +103,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                       DoctorModel doctor = doctors[index];
                       final ImageProvider<Object> doctorImage = doctor.image != null
                           ? NetworkImage(doctor.image!)
-                          : AssetImage("assets/user.png") as ImageProvider<Object>;
+                          : const AssetImage("assets/user.png") as ImageProvider<Object>;
                       final doctorName = doctor.fullName ?? 'N/A';
                       final doctorCategory = doctor.category ?? 'N/A';
                       final doctorStartTime = doctor.startTime ?? 'N/A';
@@ -163,7 +160,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                                 ),
                                 Positioned(
                                   bottom: 5,
-                                  right: 10,
+                                  right: 10, 
                                   child: Text(
                                     "$doctorStartTime to $doctorEndTime",
                                     style: GoogleFonts.montserrat(
@@ -171,6 +168,30 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                                     ),
                                   ),
                                 ),
+                                  Positioned(
+                      right: 10,
+                      top: 20,
+                      child: Consumer<DoctorController>(
+                        builder: (context, value, child) => IconButton(
+                          onPressed: () {
+                            final wish = value.wishListCheck(doctor);
+                            value.wishlistClicked(doctor.id!, wish);
+                          },
+                          icon: value.wishListCheck(doctor)
+                              ? const Icon(
+                                  Icons.favorite_border_rounded,
+                                  size: 30,
+                                  color: Colors.red,
+                                )
+                              : const Icon(
+                                  Icons.favorite_rounded,
+                                  size: 30,
+                                  color: Colors.red,
+                                ),
+                        ),
+                      ),
+                    )
+
                               ],
                             ),
                           ),
@@ -179,7 +200,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                     },
                   );
                 } else {
-                  return Center(child: Text('No doctors found'));
+                  return const Center(child: Text('No doctors found'));
                 }
               },
             ),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:medic/model/doctor_model.dart';
@@ -8,12 +9,9 @@ class DoctorListProvider extends ChangeNotifier {
   late  Future<List<DoctorModel>> doctorListFuture;
  TextEditingController searchController= TextEditingController();
   List<DoctorModel> doctors = [];
-  List<DoctorModel> _filteredDoctors = [];
+  List<DoctorModel> filteredDoctors = [];
   bool isSearching = false;
 
-  List<DoctorModel> get filteredDoctors => _filteredDoctors;
-  
- 
 
   void toggleSearch() {
     isSearching = !isSearching;
@@ -21,15 +19,10 @@ class DoctorListProvider extends ChangeNotifier {
   }
   
 
-  void searchDoctors(String query) {
-    if (query.isEmpty) {
-      _filteredDoctors = doctors;
-    } else {
-      _filteredDoctors = doctors.where((doctor) {
-        final doctorName = doctor.fullName?.toLowerCase() ?? '';
-        return doctorName.contains(query.toLowerCase());
-      }).toList();
-    }
+  
+  Future<void> wishlistClicked(String id, bool status) async {
+    await doctorService.wishListClicked(id, status);
     notifyListeners();
   }
-}
+
+}   

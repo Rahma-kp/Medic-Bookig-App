@@ -3,6 +3,7 @@ import 'package:medic/controller/carousel_controller.dart';
 import 'package:medic/controller/doctor_provider.dart';
 import 'package:medic/model/doctor_model.dart';
 import 'package:medic/view/userside/home/category_screen.dart';
+import 'package:medic/view/userside/home/favorite_list.dart';
 import 'package:medic/view/userside/home/notification_screen.dart';
 import 'package:medic/view/userside/home/widget/carousel_widget.dart';
 import 'package:medic/view/userside/home/widget/category_widget.dart';
@@ -33,20 +34,25 @@ class _HomeScreenState extends State<HomeScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Hai, Rahma"),
-        backgroundColor: Color.fromARGB(255, 241, 240, 240),
+        title: const Text("Hai, Rahma"),
+        backgroundColor: const Color.fromARGB(255, 241, 240, 240),
         actions: [
           IconButton(
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => NotificationScreen(),
+                builder: (context) => const NotificationScreen(),
               ));
             },
-            icon: Icon(Icons.notifications),
-          )
+            icon: const Icon(Icons.notifications),
+          ),
+            IconButton(onPressed: (){
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const FavouriteDoctorsScreen(),
+              ));
+            }, icon: const Icon(Icons.favorite)),
         ],
       ),
-      backgroundColor: Color.fromARGB(255, 241, 240, 240),
+      backgroundColor: const Color.fromARGB(255, 241, 240, 240),
       body: Consumer<HomeCaroselController>(
         builder: (context, value, child) => Padding(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
@@ -70,14 +76,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => CategoryScreen(),
+                          builder: (context) => const CategoryScreen(),
                         ));
                       },
                       child: Text(
                         "See All",
                         style: GoogleFonts.montserrat(
                             fontSize: size.width * 0.04,
-                            color: Color.fromARGB(255, 84, 118, 145),
+                            color: const Color.fromARGB(255, 84, 118, 145),
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -103,11 +109,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   future: _doctorsFuture,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
                       return Center(child: Text("Error: ${snapshot.error}"));
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Center(child: Text("No doctors available"));
+                      return const Center(child: Text("No doctors available"));
                     } else {
                       return DoctorsListView(
                           size: size, doctor: snapshot.data!);

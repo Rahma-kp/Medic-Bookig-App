@@ -21,7 +21,7 @@ class _UserScreenState extends State<UserScreen> {
       body: Stack(
         children: [
           Container(
-            color: Color.fromARGB(255, 210, 209, 209),
+            color: const Color.fromARGB(255, 210, 209, 209),
             height: double.infinity,
             width: double.infinity,
           ),
@@ -33,17 +33,17 @@ class _UserScreenState extends State<UserScreen> {
                   color: const Color.fromARGB(255, 142, 139, 139).withOpacity(0.5),
                   spreadRadius: 5,
                   blurRadius: 7,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
-              color: Color.fromARGB(255, 71, 153, 124),
-              borderRadius: BorderRadius.only(
+              color: const Color.fromARGB(255, 71, 153, 124),
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(50),
                 bottomRight: Radius.circular(50),
               ),
             ),
           ),
-          Positioned(
+          const Positioned(
             top: 280,
             left: 130,
             child: Column(
@@ -77,7 +77,7 @@ class _UserScreenState extends State<UserScreen> {
                 setState(() {
                   selectedItem = value;
                   if(value=="Settings"){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingScreen(),));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SettingScreen(),));
                   }if(value=="Locaion"){
                   }
                 });
@@ -94,11 +94,11 @@ class _UserScreenState extends State<UserScreen> {
                         fontSize: size.width * 0.04, fontWeight: FontWeight.w600)),
                 ),
               ],
-              icon: Icon(Icons.more_vert_outlined, color: Colors.white),
+              icon: const Icon(Icons.more_vert_outlined, color: Colors.white),
             ),
           ),
 
-          Positioned(
+          const Positioned(
             top: 120,
             left: 120,
             child: CircleAvatar(
@@ -107,7 +107,7 @@ class _UserScreenState extends State<UserScreen> {
             ),
           ),
 
-          DetailsBox(
+          const DetailsBox(
             clr1: Colors.black,
             clr2: Colors.black,
             text1: "Age",
@@ -116,7 +116,7 @@ class _UserScreenState extends State<UserScreen> {
             top: 360,
             clr: Colors.white,
           ),
-          DetailsBox(
+          const DetailsBox(
             text1: "Height",
             text2: "163",
             top: 360,
@@ -125,7 +125,7 @@ class _UserScreenState extends State<UserScreen> {
             clr1: Colors.white,
             clr2: Colors.white,
           ),
-          DetailsBox(
+          const DetailsBox(
             text1: "Weight",
             text2: "50",
             top: 480,
@@ -134,7 +134,7 @@ class _UserScreenState extends State<UserScreen> {
             clr1: Colors.white,
             clr2: Colors.white,
           ),
-          DetailsBox(
+          const DetailsBox(
             text1: "Blood Group",
             text2: "B+",
             top: 480,

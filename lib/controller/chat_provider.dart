@@ -1,8 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:medic/model/chat_model.dart';
 import 'package:medic/model/doctor_model.dart';
 import 'package:medic/model/message_model.dart';
@@ -16,20 +18,32 @@ class ChatController extends ChangeNotifier {
   TextEditingController messageController = TextEditingController();
   ChatService chatService = ChatService();
   List<ChatModel>? myAllChat = [];
+  final ImagePicker picker =ImagePicker();
   bool isLoading=false;
   
   late ScrollController scrollController;
   List<MessageModel> allMessage = [];
+
+    Future<void> pickAndSendImage(String receiverId) async {
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      File file = File(image.path);
+      String imageUrl = await chatService.uploadImage(file);
+      await sendMessage(receiverId, imageUrl: imageUrl);
+    }
+  }
  
 
 
-  sendMessage(String receiverId) async {
+ sendMessage(String receiverId, {String? imageUrl}) async {
     await createChat(receiverId);
     final data = MessageModel(
-        senderId: firebaseAuth.currentUser!.uid,
-        receiverId: receiverId,
-        message: messageController.text,
-        timeStamp: DateTime.now());
+      senderId: firebaseAuth.currentUser!.uid,
+      receiverId: receiverId,
+      message: imageUrl ?? messageController.text,
+      timeStamp: DateTime.now(),
+      type: imageUrl != null ? 'image' : 'text',
+    );
     await chatService.sendMessage(data);
 
     getMessages(receiverId);
@@ -109,6 +123,8 @@ class ChatController extends ChangeNotifier {
           scrollController.jumpTo(scrollController.position.maxScrollExtent);
         }
       });
+
+
 }
 
 

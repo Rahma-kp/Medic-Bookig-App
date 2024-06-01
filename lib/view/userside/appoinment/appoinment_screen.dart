@@ -148,7 +148,7 @@ class _AppoinmentBookigScreenState extends State<AppoinmentBookigScreen> {
                         height: 50,
                         width: 200,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 122, 182, 159),
+                          color: Color.fromARGB(255, 71, 153, 124),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(

@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:medic/model/review_model.dart';
 import 'package:medic/model/user_model.dart';
 
 class FireStoreService {
@@ -142,48 +143,48 @@ class FireStoreService {
   //   } catch (e) {}
   // }
 
-  // addReview(ReviewModel data) async {
-  //   try {
-  //     await firestore
-  //         .collection(courseCollection)
-  //         .doc(data.courseId)
-  //         .collection('review')
-  //         .doc(data.reviewId)
-  //         .set(data.toJson());
-  //   } catch (e) {
-  //     throw 'Error in add Review $e';
-  //   }
-  // }
+  addReview(ReviewModel data) async {
+    try {
+      await firestore
+          .collection(doctorCollection)
+          .doc(data.courseId)
+          .collection('review')
+          .doc(data.reviewId)
+          .set(data.toJson());
+    } catch (e) {
+      throw 'Error in add Review $e';
+    }
+  }
 
-  // getAllReviews(String courseId) async {
-  //   try {
-  //     final data = await firestore
-  //         .collection(courseCollection)
-  //         .doc(courseId)
-  //         .collection('review')
-  //         .get();
-  //     return data.docs
-  //         .map((item) => ReviewModel.fromJson(item.data()))
-  //         .toList();
-  //   } catch (e) {
-  //     throw 'Error in getDat: $e';
-  //   }
-  // }
+  getAllReviews(String courseId) async {
+    try {
+      final data = await firestore
+          .collection(doctorCollection)
+          .doc(courseId)
+          .collection('review')
+          .get();
+      return data.docs
+          .map((item) => ReviewModel.fromJson(item.data()))
+          .toList();
+    } catch (e) {
+      throw 'Error in getDat: $e';
+    }
+  }
 
-  // getMyReviews() async {
-  //   try {
-  //     final data = await firestore
-  //         .collection(courseCollection)
-  //         .doc()
-  //         .collection('review')
-  //         .get();
-  //     return data.docs
-  //         .map((item) => ReviewModel.fromJson(item.data()))
-  //         .toList();
-  //   } catch (e) {
-  //     throw 'Error in get my reviews: $e';
-  //   }
-  // }
+  getMyReviews() async {
+    try {
+      final data = await firestore
+          .collection(doctorCollection)
+          .doc()
+          .collection('review')
+          .get();
+      return data.docs
+          .map((item) => ReviewModel.fromJson(item.data()))
+          .toList();
+    } catch (e) {
+      throw 'Error in get my reviews: $e';
+    }
+  }
 
   // addRatings(RatingModel data) async {
   //   try {

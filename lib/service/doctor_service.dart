@@ -43,6 +43,8 @@ class DoctorService {
     final snapshot = await doctor.get();
     return snapshot.docs.map((doc) => doc.data()).toList();
   }
+
+  
 Future<List<DoctorModel>> getDoctorsByCategory(String category) async {
   try {
     final snapshot = await doctor.where('category', isEqualTo: category).get();
@@ -69,6 +71,28 @@ Future<List<DoctorModel>> getDoctorsByCategory(String category) async {
       return File(pickedFile.path);
     }
     return null;
+  }
+  
+  Future<void> wishListClicked(String id, bool status) async {
+    try {
+      if (status == true) {
+        await doctor.doc(id).update({
+          'wishlist': FieldValue.arrayUnion([
+            firebaseAuth.currentUser!.email ??
+                firebaseAuth.currentUser!.phoneNumber
+          ])
+        });
+      } else {
+        await doctor.doc(id).update({
+          'wishlist': FieldValue.arrayRemove([
+            firebaseAuth.currentUser!.email ??
+                firebaseAuth.currentUser!.phoneNumber
+          ])
+        });
+      }
+    } catch (e) {
+      log('got a error of :$e');
+    }
   }
 }
 

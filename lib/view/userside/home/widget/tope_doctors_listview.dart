@@ -1,9 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medic/controller/doctor_provider.dart';
 import 'package:medic/model/doctor_model.dart';
-import 'package:medic/model/user_model.dart';
 import 'package:medic/view/userside/appoinment/doctor_profile_screen.dart';
+import 'package:medic/widget/navigation.dart';
+import 'package:provider/provider.dart';
 
 class DoctorsListView extends StatelessWidget {
   final List<DoctorModel> doctor;
@@ -36,11 +38,7 @@ class DoctorsListView extends StatelessWidget {
                 const EdgeInsets.only(left: 5, right: 5, bottom: 5, top: 5),
             child: GestureDetector(
               onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => DoctorProfile(doctor: doctor,),
-                  ),
-                );
+                NavigatorWidget().push(context, DoctorProfile(doctor: doctor));
               },
               child: Container(
                 height: 100,
@@ -55,14 +53,12 @@ class DoctorsListView extends StatelessWidget {
                       top: 10,
                       left: 10,
                       child: Container(
-                        width:
-                            80, // Adjust the width according to the desired size
-                        height:
-                            80, // Adjust the height according to the desired size
+                        width: 80,
+                        height: 80,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: Color.fromARGB(255, 159, 157, 157),
+                            color: const Color.fromARGB(255, 159, 157, 157),
                             width: 2.0,
                           ),
                         ),
@@ -105,7 +101,28 @@ class DoctorsListView extends StatelessWidget {
                           color: Colors.black,
                         ),
                       ),
-                    )
+                    ),
+                    Positioned(
+                      right: 10,
+                      top: 27,
+                      child: Consumer<DoctorController>(
+                        builder: (context, value, child) {
+                          final isFavourite = value.wishListCheck(doctor);
+                          return IconButton(
+                            onPressed: () {
+                              value.wishlistClicked(doctor.id!, isFavourite);
+                            },
+                            icon: Icon(
+                              isFavourite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              size: 30,
+                              color: Colors.red,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -120,7 +137,7 @@ class DoctorsListView extends StatelessWidget {
     try {
       return double.parse(rating);
     } catch (e) {
-      return 0.0; // Default value if parsing fails
+      return 0.0;
     }
   }
 }

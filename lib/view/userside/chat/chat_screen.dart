@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medic/controller/chat_provider.dart';
 import 'package:medic/model/doctor_model.dart';
-import 'package:medic/model/user_model.dart';
 import 'package:medic/view/userside/chat/widget/chat_bottom.dart';
 import 'package:medic/view/userside/chat/widget/chat_bubble.dart';
 import 'package:provider/provider.dart';
@@ -56,6 +55,7 @@ class _ChatPageState extends State<ChatPage> {
                       isSent: isSender,
                       message: value.allMessage[index].message!,
                       time: formattedTime,
+                       type:value.allMessage[index].type!,
                     );
                   },
                 );

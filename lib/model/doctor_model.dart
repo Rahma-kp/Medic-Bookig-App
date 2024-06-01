@@ -10,15 +10,15 @@ class DoctorModel {
   String? workingDays;
   String? startTime;
   String? endTime;
-  String? patients;
   String? experience;
   String? rating;
   int? fee;
   String? email;
   String? password;
+  List? wishlist;
 
   DoctorModel(
-      {this.id,
+      {required this.id,
       this.image,
       this.fullName,
       this.age,
@@ -32,8 +32,8 @@ class DoctorModel {
       this.email,
       this.password,
       this.aboutDoctor,
-      this.patients,
       this.experience,
+     this.wishlist,
       this.rating});
 
   double get ratingAsDouble {
@@ -53,10 +53,10 @@ class DoctorModel {
         startTime: json['startTime'],
         endTime: json['endTime'],
         aboutDoctor: json['aboutDoctor'],
-        patients: json['patients'],
         experience: json['experience'],
         email: json['eamil'],
         password: json['password'],
+        wishlist: List<String>.from(json['wishlist']),
         fee:
             json['fee'] is int ? json['fee'] : int.tryParse(json['fee'] ?? '0'),
         rating: json['rating']);
@@ -64,6 +64,7 @@ class DoctorModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'id':id,
       'image': image,
       'fullName': fullName,
       'password': password,
@@ -75,10 +76,10 @@ class DoctorModel {
       'startTime': startTime,
       'endTime': endTime,
       'aboutDoctor': aboutDoctor,
-      'patients': patients,
       'experience': experience,
       'rating': rating,
-      'fee': fee
+      'fee': fee,
+      'wishlist':wishlist,
     };
   }
 }

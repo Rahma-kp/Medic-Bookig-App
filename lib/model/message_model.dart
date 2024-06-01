@@ -5,15 +5,17 @@ class MessageModel {
   String? receiverId;
   String? message;
   DateTime? timeStamp;
+  String? type;
 
   MessageModel({
     required this.senderId,
     required this.receiverId,
     required this.message,
     required this.timeStamp,
+    required this.type,
   });
 
-  factory MessageModel.fromJson(json) {
+  factory MessageModel.fromJson(Map<String, dynamic> json) {
     return MessageModel(
       senderId: json['senderId'],
       receiverId: json['receiverId'],
@@ -21,6 +23,7 @@ class MessageModel {
       timeStamp: json['timeStamp'] != null
           ? (json['timeStamp'] as Timestamp).toDate()
           : null,
+      type: json['type'],
     );
   }
 
@@ -29,7 +32,8 @@ class MessageModel {
       'senderId': senderId,
       'receiverId': receiverId,
       'message': message,
-      'timeStamp': timeStamp,
+      'timeStamp': timeStamp != null ? Timestamp.fromDate(timeStamp!) : null,
+      'type': type,
     };
   }
 }

@@ -11,7 +11,7 @@ class BottomDoctorNavigation extends StatelessWidget {
   final List<Widget> _pages = [
     AppointmentDoctors(),
     DoctorReviewScreen(),
-    ChatListScreen(),
+  
     DoctorProfileScreen()
   
   ];

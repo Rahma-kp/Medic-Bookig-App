@@ -53,8 +53,8 @@ class ChatBottomBar extends StatelessWidget {
                       if (chatController.messageController.text.isNotEmpty) {
                         await chatController.sendMessage(userInfo.id!);
                         chatController.messageController.clear();
-                        final getUserPrd =
-                            Provider.of<User>(context, listen: false);
+                        // final getUserPrd =
+                        //     Provider.of<User>(context, listen: false);
                         // await Provider.of<NotificationController>(context,
                         //         listen: false)
                         //     .sendMessageNotification(
@@ -70,7 +70,9 @@ class ChatBottomBar extends StatelessWidget {
                     ),
               ),
             ),
-        )],
+        ),IconButton(onPressed: () async {
+          await chatController.pickAndSendImage(userInfo.id!);
+        }, icon: const Icon(Icons.camera_alt_outlined))],
         ),
       ),
     );
