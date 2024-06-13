@@ -1,25 +1,23 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medic/model/doctor_model.dart';
 import 'package:medic/view/userside/appoinment/payment_confirm_screen.dart';
+import 'package:medic/view/userside/appoinment/widget/genrate_time_slote.dart';
 
-class AppoinmentBookigScreen extends StatefulWidget {
-  const AppoinmentBookigScreen({Key? key});
+class AppoinmentBookingScreen extends StatefulWidget {
+  final DoctorModel doctor;
+
+  const AppoinmentBookingScreen({Key? key, required this.doctor}) : super(key: key);
 
   @override
-  State<AppoinmentBookigScreen> createState() => _AppoinmentBookigScreenState();
+  State<AppoinmentBookingScreen> createState() => _AppoinmentBookingScreenState();
 }
 
-class _AppoinmentBookigScreenState extends State<AppoinmentBookigScreen> {
-  late DateTime _selectedDate;
-  late List<String> _availableTimeSlots;
+class _AppoinmentBookingScreenState extends State<AppoinmentBookingScreen> {
+  late List<String> availableTimeSlots;
+  List<String> _bookedTimeSlots = [];
   int _selectedIndex = -1;
-
-
-  List<String> _bookedTimeSlots = [
-    '11:00 AM',
-    '2:00 PM',
-  ];
+  DateTime? _selectedDate;
 
   @override
   void initState() {
@@ -28,14 +26,24 @@ class _AppoinmentBookigScreenState extends State<AppoinmentBookigScreen> {
     _updateAvailableTimeSlots(_selectedDate);
   }
 
-  void _updateAvailableTimeSlots(DateTime selectedDate) {
-    _availableTimeSlots = [
-      '10:00 AM',
-      '11:00 AM',
-      '2:00 PM',
-      '3:00 PM',
-      '4:00 PM',
-    ];
+  void _updateAvailableTimeSlots(DateTime? selectedDate) {
+    setState(() {
+      // Update available time slots based on the selected date
+      availableTimeSlots = generateTimeSlots(
+        widget.doctor.startTime!.trim(),
+        widget.doctor.endTime!.trim()
+      );
+
+      // Here you can add the logic to fetch booked time slots for the selected date
+      // For demonstration, we're using dummy booked time slots
+      _bookedTimeSlots = ['10:30 AM', '11:00 AM'];
+    });
+  }
+
+  void _onTimeSlotSelected(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
@@ -43,13 +51,10 @@ class _AppoinmentBookigScreenState extends State<AppoinmentBookigScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          "Appointment Booking",
-        ),
+        title: const Text("Appointment Booking"),
       ),
       body: Padding(
-        padding:
-            const EdgeInsets.only(bottom: 30, left: 10, right: 10, top: 10),
+        padding: const EdgeInsets.only(bottom: 30, left: 10, right: 10, top: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,9 +63,9 @@ class _AppoinmentBookigScreenState extends State<AppoinmentBookigScreen> {
               color: Colors.white,
               elevation: 6,
               child: CalendarDatePicker(
-                initialDate: DateTime.now(),
-                firstDate: DateTime.now().subtract(Duration(days: 140)),
-                lastDate: DateTime.now().add(Duration(days: 30)),
+                initialDate: _selectedDate!,
+                firstDate: DateTime.now().subtract(const Duration(days: 140)),
+                lastDate: DateTime.now().add(const Duration(days: 30)),
                 onDateChanged: (DateTime newDate) {
                   setState(() {
                     _selectedDate = newDate;
@@ -70,9 +75,7 @@ class _AppoinmentBookigScreenState extends State<AppoinmentBookigScreen> {
                 },
               ),
             ),
-            SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Text(
@@ -88,23 +91,20 @@ class _AppoinmentBookigScreenState extends State<AppoinmentBookigScreen> {
                 children: [
                   Expanded(
                     child: GridView.builder(
-                      padding: EdgeInsets.all(10),
-                      itemCount: _availableTimeSlots.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      padding: const EdgeInsets.all(10),
+                      itemCount: availableTimeSlots.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         mainAxisSpacing: 10,
                         crossAxisSpacing: 10,
                         childAspectRatio: 2,
                       ),
                       itemBuilder: (context, index) {
-                        bool isBooked =
-                            _bookedTimeSlots.contains(_availableTimeSlots[index]);
+                        bool isBooked = _bookedTimeSlots.contains(availableTimeSlots[index]);
                         return GestureDetector(
                           onTap: () {
                             if (!isBooked) {
-                              setState(() {
-                                _selectedIndex = index;
-                              });
+                              _onTimeSlotSelected(index);
                             }
                           },
                           child: Container(
@@ -114,13 +114,13 @@ class _AppoinmentBookigScreenState extends State<AppoinmentBookigScreen> {
                               color: isBooked
                                   ? Colors.red
                                   : _selectedIndex == index
-                                      ? Color.fromARGB(255, 122, 182, 159)
-                                      : Color.fromARGB(255, 186, 184, 184),
+                                      ? const Color.fromARGB(255, 122, 182, 159)
+                                      : const Color.fromARGB(255, 186, 184, 184),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Center(
                               child: Text(
-                                _availableTimeSlots[index],
+                                availableTimeSlots[index],
                                 style: GoogleFonts.montserrat(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w700,
@@ -140,15 +140,23 @@ class _AppoinmentBookigScreenState extends State<AppoinmentBookigScreen> {
                   Center(
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => AppoinmentConfirmScreen(),
-                        ));
+                        if (_selectedIndex != -1 && !_bookedTimeSlots.contains(availableTimeSlots[_selectedIndex])) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => AppoinmentConfirmScreen(
+                              selectedDate: _selectedDate!,
+                              selectedTimeSlot: availableTimeSlots[_selectedIndex],
+                               doctor: widget.doctor,
+                            ),
+                          ));
+                        } else {
+                          print("Please select a valid time slot");
+                        }
                       },
                       child: Container(
                         height: 50,
                         width: 200,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 71, 153, 124),
+                          color: const Color.fromARGB(255, 71, 153, 124),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Center(

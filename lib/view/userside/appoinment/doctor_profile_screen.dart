@@ -141,7 +141,8 @@ class _DoctorProfileState extends State<DoctorProfile> {
             GestureDetector(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const AppoinmentBookigScreen(),
+                  builder: (context) =>
+                     AppoinmentBookingScreen(doctor: widget.doctor),
                 ));
               },
               child: Padding(

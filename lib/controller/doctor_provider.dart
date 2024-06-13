@@ -9,7 +9,7 @@ import 'package:medic/service/doctor_service.dart';
 class DoctorController extends ChangeNotifier {
   final DoctorService _doctorService = DoctorService();
 
-  List<DoctorModel> allDoctorList = [];
+  List<DoctorModel> allDoctorList = [];    
 
   Future<void> addDoctor(DoctorModel doctor) async {
     try {
@@ -99,4 +99,7 @@ class DoctorController extends ChangeNotifier {
     final user = currentUser.email ?? currentUser.phoneNumber;
     return allDoctorList.where((doctor) => doctor.wishlist!.contains(user)).toList();
   }
+
+  
+ 
 }

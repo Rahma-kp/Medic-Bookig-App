@@ -1,15 +1,25 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:medic/model/doctor_model.dart';
 import 'package:medic/widget/payment_confirm_message.dart';
 
 class AppoinmentConfirmScreen extends StatelessWidget {
-  const AppoinmentConfirmScreen({Key? key});
+  final DateTime selectedDate;
+  final String selectedTimeSlot;
+  final DoctorModel doctor;
+
+  const AppoinmentConfirmScreen({
+    Key? key,
+    required this.selectedDate,
+    required this.selectedTimeSlot,
+    required this.doctor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    String formattedDate = "${selectedDate.toLocal()}".split(' ')[0]; // Format the date as needed
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 122, 182, 159),
@@ -21,17 +31,16 @@ class AppoinmentConfirmScreen extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 70,
-              backgroundImage: AssetImage("assets/doct1.jpeg"),
+              backgroundImage: NetworkImage(doctor.image!), // Display doctor's profile image
             ),
-            SizedBox(
-              height: 15,
-            ),
+            SizedBox(height: 15),
             Text(
-              "Appointment Confirm!",
+              "Appointment Confirmed!",
               style: GoogleFonts.montserrat(
-                  color: Color.fromARGB(255, 29, 141, 102),
-                  fontSize: size.width * 0.05,
-                  fontWeight: FontWeight.bold),
+                color: Color.fromARGB(255, 29, 141, 102),
+                fontSize: size.width * 0.05,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -43,39 +52,31 @@ class AppoinmentConfirmScreen extends StatelessWidget {
                     color: Colors.black,
                   ),
                   children: [
+                    TextSpan(text: "Your appointment with "),
                     TextSpan(
-                      text: "Your Appointment with ",
-                    ),
-                    TextSpan(
-                      text: "Dr. Courtney Herry ",
+                      text: "Dr.${doctor.fullName} ",
                       style: GoogleFonts.montserrat(
                         fontSize: size.width * 0.04,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    TextSpan(text: "on "),
                     TextSpan(
-                      text: "on ",
-                    ),
-                    TextSpan(
-                      text: "May 05 ",
+                      text: "$formattedDate ",
                       style: GoogleFonts.montserrat(
                         fontSize: size.width * 0.04,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    TextSpan(text: "at "),
                     TextSpan(
-                      text: "at ",
-                    ),
-                    TextSpan(
-                      text: " 10.00 ",
+                      text: "$selectedTimeSlot ",
                       style: GoogleFonts.montserrat(
                         fontSize: size.width * 0.04,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    TextSpan(
-                      text: " is confirmed.",
-                    ),
+                    TextSpan(text: "is confirmed."),
                   ],
                 ),
               ),
@@ -88,7 +89,7 @@ class AppoinmentConfirmScreen extends StatelessWidget {
               ),
             ),
             Text(
-              "2 Days 5 Hours",
+              "2 Days 5 Hours", // This should be dynamically calculated
               style: GoogleFonts.montserrat(
                 fontSize: size.width * 0.04,
                 fontWeight: FontWeight.bold,
@@ -124,9 +125,7 @@ class AppoinmentConfirmScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 20),
             GestureDetector(
               onTap: () {
                 showDialog(
@@ -139,18 +138,21 @@ class AppoinmentConfirmScreen extends StatelessWidget {
               child: Container(
                 height: 60,
                 width: 200,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 122, 182, 159),
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Center(
-                    child: Text(
-                  "Pay Now",
-                  style: GoogleFonts.montserrat(
+                  child: Text(
+                    "Pay Now",
+                    style: GoogleFonts.montserrat(
                       fontSize: size.width * 0.04,
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic,
-                      color: Colors.white),
-                )),
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 122, 182, 159),
-                    borderRadius: BorderRadius.circular(20)),
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
             )
           ],

@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medic/model/doctor_model.dart';
 
-class DoctorService {
+class  DoctorService {
   String doctors = 'doctor';
   late CollectionReference<DoctorModel> doctor;
   final ImagePicker imagePicker = ImagePicker();

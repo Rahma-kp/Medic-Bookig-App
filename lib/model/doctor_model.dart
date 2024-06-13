@@ -17,24 +17,25 @@ class DoctorModel {
   String? password;
   List? wishlist;
 
-  DoctorModel(
-      {required this.id,
-      this.image,
-      this.fullName,
-      this.age,
-      this.gender,
-      this.category,
-      this.position,
-      this.workingDays,
-      this.startTime,
-      this.endTime,
-      this.fee,
-      this.email,
-      this.password,
-      this.aboutDoctor,
-      this.experience,
-     this.wishlist,
-      this.rating});
+  DoctorModel({
+    required this.id,
+    this.image,
+    this.fullName,
+    this.age,
+    this.gender,
+    this.category,
+    this.position,
+    this.workingDays,
+    this.startTime,
+    this.endTime,
+    this.fee,
+    this.email,
+    this.password,
+    this.aboutDoctor,
+    this.experience,
+    this.rating,
+    this.wishlist,
+  });
 
   double get ratingAsDouble {
     return double.tryParse(rating!) ?? 0.0;
@@ -42,36 +43,35 @@ class DoctorModel {
 
   factory DoctorModel.fromJson(String id, Map<String, dynamic> json) {
     return DoctorModel(
-        id: id,
-        image: json['image'],
-        fullName: json['fullName'],
-        age: json['age'],
-        gender: json['gender'],
-        category: json['category'],
-        position: json['position'],
-        workingDays: json['workingDays'],
-        startTime: json['startTime'],
-        endTime: json['endTime'],
-        aboutDoctor: json['aboutDoctor'],
-        experience: json['experience'],
-        email: json['eamil'],
-        password: json['password'],
-        wishlist: List<String>.from(json['wishlist']),
-        fee:
-            json['fee'] is int ? json['fee'] : int.tryParse(json['fee'] ?? '0'),
-        rating: json['rating']);
+      id: id,
+      image: json['image'],
+      fullName: json['fullName'],
+      age: json['age'],
+      gender: json['gender'],
+      category: json['category'],
+      position: json['position'],
+      workingDays: json['workingDays'],
+      startTime: json['startTime'],
+      endTime: json['endTime'],
+      aboutDoctor: json['aboutDoctor'],
+      experience: json['experience'],
+      email: json['email'],
+      password: json['password'],
+      wishlist: List<String>.from(json['wishlist'] ?? []),
+      fee: json['fee'] is int ? json['fee'] : int.tryParse(json['fee'] ?? '0'),
+      rating: json['rating'],
+    );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id':id,
+      'id': id,
       'image': image,
       'fullName': fullName,
-      'password': password,
-      'eamil': email,
       'age': age,
       'gender': gender,
       'category': category,
+      'position': position,
       'workingDays': workingDays,
       'startTime': startTime,
       'endTime': endTime,
@@ -79,7 +79,9 @@ class DoctorModel {
       'experience': experience,
       'rating': rating,
       'fee': fee,
-      'wishlist':wishlist,
+      'email': email,
+      'password': password,
+      'wishlist': wishlist,
     };
   }
 }
